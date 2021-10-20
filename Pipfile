@@ -15,11 +15,8 @@ flask-migrate = "*"
 flask-sqlalchemy = "*"
 flask-wtf = "*"
 psycopg2 = "*"
-
-
-[dev-packages]
-
 coverage = "*"
+email_validator = "*"
 flask-debugtoolbar = "*"
 flask-testing = "*"
 "flake8" = "*"
