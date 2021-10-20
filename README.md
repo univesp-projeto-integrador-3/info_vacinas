@@ -5,6 +5,8 @@ Projeto web para disponibilizar informações sobre vacinas.
 O projeto utiliza a linguagem de programação Python com o framework Flask
 e banco de dados SQLite.
 
+A aplicação está disponível na internet, no endereço: https://info-vacinas.herokuapp.com/
+
 ## Clonar o projeto
 
 ```sh
