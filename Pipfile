@@ -20,6 +20,7 @@ email_validator = "*"
 flask-debugtoolbar = "*"
 flask-testing = "*"
 "flake8" = "*"
+gunicorn = "*"
 
 
 [requires]
