@@ -4,13 +4,13 @@
 import os
 
 from flask import Flask, render_template
-from flask_login import LoginManager
+from flask_admin import Admin
 from flask_bcrypt import Bcrypt
-from flask_debugtoolbar import DebugToolbarExtension
 from flask_bootstrap import Bootstrap
-from flask_sqlalchemy import SQLAlchemy
+from flask_debugtoolbar import DebugToolbarExtension
+from flask_login import LoginManager
 from flask_migrate import Migrate
-
+from flask_sqlalchemy import SQLAlchemy
 
 # instantiate the extensions
 login_manager = LoginManager()
@@ -19,6 +19,7 @@ toolbar = DebugToolbarExtension()
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
+admin = Admin(template_mode='bootstrap4')
 
 
 def create_app(script_info=None):
@@ -43,10 +44,11 @@ def create_app(script_info=None):
     bootstrap.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
+    admin.init_app(app)
 
     # register blueprints
-    from project.server.user.views import user_blueprint
     from project.server.main.views import main_blueprint
+    from project.server.user.views import user_blueprint
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(main_blueprint)
