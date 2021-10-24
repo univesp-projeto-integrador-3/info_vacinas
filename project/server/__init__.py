@@ -45,11 +45,11 @@ def create_app(script_info=None):
     bootstrap.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
+    admin = Admin(template_mode='bootstrap4')
     admin.init_app(app, index_view=AdminIndexView(),
                    endpoint='admin', url='/admin')
 
     # register blueprints
-    from project.server.admin.views import admin_blueprint
     from project.server.main.views import main_blueprint
     from project.server.user.views import user_blueprint
 
@@ -57,12 +57,14 @@ def create_app(script_info=None):
     app.register_blueprint(main_blueprint)
 
     # flask-admin
-    #admin.add_view(ModelView(User, db.session, endpoint='usuario_admin'))
-    #admin.add_view(ModelView(Vacina, db.session, endpoint='/vacina'))
-    # admin.add_view(ModelView(CategoriaIdade, db.session,
-    # endpoint='categoria_idade'))
-    # admin.add_view(ModelView(PeriodoIdade, db.session,
-    # endpoint='periodo_idade'))
+    admin.add_view(ModelView(User, db.session,
+                             endpoint='usuario_admin', name="Usuários"))
+    admin.add_view(ModelView(Vacina, db.session,
+                             endpoint='/vacina', name="Vacina"))
+    admin.add_view(ModelView(CategoriaIdade, db.session,
+                             endpoint='categoria_idade', name="Categoria idade"))
+    admin.add_view(ModelView(PeriodoIdade, db.session,
+                             endpoint='periodo_idade', name="Período idade"))
 
     login_manager.login_view = "user.login"
     login_manager.login_message_category = "danger"
@@ -93,5 +95,4 @@ def create_app(script_info=None):
     def ctx():
         return {"app": app, "db": db}
 
-    print(app.url_map)
     return app

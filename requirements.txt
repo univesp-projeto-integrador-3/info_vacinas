@@ -40,7 +40,6 @@ Mako
 MarkupSafe
 packaging
 pipupgrade
-psycopg2
 pyparsing
 python-dateutil
 python-editor
@@ -55,3 +54,5 @@ urllib3
 webassets
 Werkzeug
 WTForms
+psycopg2-binary
+importlib-metadata

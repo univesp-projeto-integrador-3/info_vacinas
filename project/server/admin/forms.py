@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from server import db
-from server.models import Role, User
+from project.server import db
+from project.server.models import Role, User
 from wtforms import ValidationError
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.fields import PasswordField, StringField, SubmitField

@@ -2,17 +2,17 @@ from flask import (Blueprint, abort, flash, redirect, render_template, request,
                    url_for)
 from flask_login import current_user, login_required
 from flask_rq import get_queue
-from server import db
-from server.admin.forms import (ChangeAccountTypeForm, ChangeUserEmailForm,
-                                InviteUserForm, NewUserForm)
-from server.decorators import admin_required
-from server.email import send_email
-from server.models import EditableHTML, Role, User
+from project.server import db
+from project.server.admin.forms import (ChangeAccountTypeForm,
+                                        ChangeUserEmailForm, InviteUserForm,
+                                        NewUserForm)
+from project.server.decorators import admin_required
+from project.server.models import EditableHTML, Role, User
 
-admin = Blueprint('admin', __name__)
+admin_blueprint = Blueprint('admin', __name__)
 
 
-@admin.route('/')
+@admin_blueprint.route('/')
 @login_required
 @admin_required
 def index():
@@ -20,7 +20,7 @@ def index():
     return render_template('admin/index.html')
 
 
-@admin.route('/new-user', methods=['GET', 'POST'])
+@admin_blueprint.route('/new-user', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def new_user():
@@ -40,7 +40,7 @@ def new_user():
     return render_template('admin/new_user.html', form=form)
 
 
-@admin.route('/invite-user', methods=['GET', 'POST'])
+@admin_blueprint.route('/invite-user', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def invite_user():
@@ -73,7 +73,7 @@ def invite_user():
     return render_template('admin/new_user.html', form=form)
 
 
-@admin.route('/users')
+@admin_blueprint.route('/users')
 @login_required
 @admin_required
 def registered_users():
@@ -84,8 +84,8 @@ def registered_users():
         'admin/registered_users.html', users=users, roles=roles)
 
 
-@admin.route('/user/<int:user_id>')
-@admin.route('/user/<int:user_id>/info')
+@admin_blueprint.route('/user/<int:user_id>')
+@admin_blueprint.route('/user/<int:user_id>/info')
 @login_required
 @admin_required
 def user_info(user_id):
@@ -96,7 +96,7 @@ def user_info(user_id):
     return render_template('admin/manage_user.html', user=user)
 
 
-@admin.route('/user/<int:user_id>/change-email', methods=['GET', 'POST'])
+@admin_blueprint.route('/user/<int:user_id>/change-email', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def change_user_email(user_id):
@@ -114,7 +114,7 @@ def change_user_email(user_id):
     return render_template('admin/manage_user.html', user=user, form=form)
 
 
-@admin.route(
+@admin_blueprint.route(
     '/user/<int:user_id>/change-account-type', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -138,7 +138,7 @@ def change_account_type(user_id):
     return render_template('admin/manage_user.html', user=user, form=form)
 
 
-@admin.route('/user/<int:user_id>/delete')
+@admin_blueprint.route('/user/<int:user_id>/delete')
 @login_required
 @admin_required
 def delete_user_request(user_id):
@@ -149,7 +149,7 @@ def delete_user_request(user_id):
     return render_template('admin/manage_user.html', user=user)
 
 
-@admin.route('/user/<int:user_id>/_delete')
+@admin_blueprint.route('/user/<int:user_id>/_delete')
 @login_required
 @admin_required
 def delete_user(user_id):
@@ -165,7 +165,7 @@ def delete_user(user_id):
     return redirect(url_for('admin.registered_users'))
 
 
-@admin.route('/_update_editor_contents', methods=['POST'])
+@admin_blueprint.route('/_update_editor_contents', methods=['POST'])
 @login_required
 @admin_required
 def update_editor_contents():
