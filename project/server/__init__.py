@@ -1,10 +1,9 @@
 # project/server/__init__.py
-
-
 import os
 
 from flask import Flask, render_template
-from flask_admin import Admin
+from flask_admin import Admin, AdminIndexView
+from flask_admin.contrib.sqla import ModelView
 from flask_bcrypt import Bcrypt
 from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
@@ -23,6 +22,8 @@ admin = Admin(template_mode='bootstrap4')
 
 
 def create_app(script_info=None):
+    from project.server.models import (CategoriaIdade, PeriodoIdade, User,
+                                       Vacina)
 
     # instantiate the app
     app = Flask(
@@ -44,17 +45,24 @@ def create_app(script_info=None):
     bootstrap.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
-    admin.init_app(app)
+    admin.init_app(app, index_view=AdminIndexView(),
+                   endpoint='admin', url='/admin')
 
     # register blueprints
+    from project.server.admin.views import admin_blueprint
     from project.server.main.views import main_blueprint
     from project.server.user.views import user_blueprint
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(main_blueprint)
 
-    # flask login
-    from project.server.models import User
+    # flask-admin
+    #admin.add_view(ModelView(User, db.session, endpoint='usuario_admin'))
+    #admin.add_view(ModelView(Vacina, db.session, endpoint='/vacina'))
+    # admin.add_view(ModelView(CategoriaIdade, db.session,
+    # endpoint='categoria_idade'))
+    # admin.add_view(ModelView(PeriodoIdade, db.session,
+    # endpoint='periodo_idade'))
 
     login_manager.login_view = "user.login"
     login_manager.login_message_category = "danger"
@@ -85,4 +93,5 @@ def create_app(script_info=None):
     def ctx():
         return {"app": app, "db": db}
 
+    print(app.url_map)
     return app
