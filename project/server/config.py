@@ -1,6 +1,8 @@
 # project/server/config.py
 
 import os
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env.
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -22,7 +24,8 @@ class DevelopmentConfig(BaseConfig):
     DEBUG_TB_ENABLED = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DATABASE_URL", "sqlite:///{0}".format(os.path.join(basedir, "dev.db"))
+        "DATABASE_URL",
+        "sqlite:///{0}".format(os.path.join(basedir, "dev.db"))
     )
 
 
@@ -31,7 +34,10 @@ class TestingConfig(BaseConfig):
 
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///"
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_TEST_URL", "sqlite:///")
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+        "DATABASE_TEST_URL",
+        "sqlite:///"
+    )
     TESTING = True
 
 

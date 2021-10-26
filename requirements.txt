@@ -56,3 +56,4 @@ Werkzeug
 WTForms
 psycopg2-binary
 importlib-metadata
+python-dotenv

@@ -44,7 +44,9 @@ def drop_db():
 @cli.command()
 def create_admin():
     """Creates the admin user."""
-    db.session.add(User(email="ad@min.com", password="admin", admin=True))
+    db.session.add(User(email="royopa@gmail.com", password="adminUnivesp", admin=True))
+    db.session.add(User(email="walcastillo@yahoo.com.br", password="adminUnivesp", admin=True))
+    db.session.add(User(email="yutomida@outlook.com", password="adminUnivesp", admin=True))
     db.session.commit()
 
 
