@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "de66c5258b583177a00eba574cc614312e76688816889a867cd92bc39b2b5af9"
+            "sha256": "517d6cffc87475c123299e0d0d03994b4fad233525825b4b83b2ffdec07c4df1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -271,11 +271,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:262d51b4e536adf58f09fdccc510b69a5a7348d9ca698402c0fccfaed93c60a7",
-                "sha256:449ab92ab9bd663095df251444b9e974862f81f0dfa479ba9c5ae7277ec85827"
+                "sha256:072b61422be9da464b0bb40cdb44267dd584582056b77a2982d7c66c767f044c",
+                "sha256:8ffd1ca479364a2ea78fe23a5710d5f940c50576f45c3f62edf9f7f9242cec0b"
             ],
             "index": "pypi",
-            "version": "==9.5.2"
+            "version": "==9.6.0"
         },
         "flask": {
             "hashes": [
@@ -678,6 +678,14 @@
             ],
             "index": "pypi",
             "version": "==2.8.2"
+        },
+        "python-dotenv": {
+            "hashes": [
+                "sha256:14f8185cc8d494662683e6914addcb7e95374771e707601dfc70166946b4c4b8",
+                "sha256:bbd3da593fc49c249397cbfbcc449cf36cb02e75afc8157fcc6a81df6fb7750a"
+            ],
+            "index": "pypi",
+            "version": "==0.19.1"
         },
         "python-editor": {
             "hashes": [
