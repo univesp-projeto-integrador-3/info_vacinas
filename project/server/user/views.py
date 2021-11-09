@@ -1,13 +1,11 @@
 # project/server/user/views.py
 
 
-from flask import render_template, Blueprint, url_for, redirect, flash, request
-from flask_login import login_user, logout_user, login_required
-
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_login import login_required, login_user, logout_user
 from project.server import bcrypt, db
 from project.server.models import User
 from project.server.user.forms import LoginForm, RegisterForm
-
 
 user_blueprint = Blueprint("user", __name__)
 
