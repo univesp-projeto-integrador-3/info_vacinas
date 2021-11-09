@@ -5,5 +5,24 @@
 }
 
 .calendario-pagina-faixa-etaria {
-  padding-top: 16rem;
+  padding-top: 450px;
+}
+
+.calendario-adolescentes {
+  padding-top: 450px;
+}
+
+.calendario-adultos {
+  
+}
+
+.calendario-criancas {
+  padding-top: 100px;
+}
+
+.calendario-idosos {
+  padding-top: 150px;
+}
+
+.calendario-gestantes {
 }

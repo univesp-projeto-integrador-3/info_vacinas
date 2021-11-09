@@ -1,12 +1,15 @@
 {% extends "_base.html" %}
 {% block content %}
 
-<div class="calendario-pagina-faixa-etaria">
-    <h1>Vacinas para crianças</h1>
-    <hr><br>
-    <p>
-        <img class="mb-4" src="{{url_for('static', filename='img/crianças.png')}}" width="990">
-    </p>
-</div>
+<section class="jumbotron text-center calendario-pagina-faixa-etaria">
+    <div class="container">
+        <h1 class="jumbotron-heading">Vacinas para crianças</h1>
+        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
+            etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+        <p>
+            <img src="{{url_for('static', filename='img/crianças.png')}}" width="990">
+        </p>
+    </div>
+</section>
 
 {% endblock %}
