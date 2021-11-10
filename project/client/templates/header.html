@@ -2,7 +2,12 @@
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-primary">
   <div class="container">
     <!-- Navbar Brand -->
-    <a class="navbar-brand" href="{{ url_for('main.home') }}">{{ config.APP_NAME }}</a>
+    <a class="navbar-brand" href="{{ url_for('main.home') }}">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/739-syringe.svg/512px-739-syringe.svg.png"
+        width="30" height="30" class="d-inline-block align-top" alt="">
+      {{ config.APP_NAME }}
+    </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -28,6 +33,10 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('admin.index') }}">Admin</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.sobre') }}">Sobre</a>
+        </li>
+
         {% if current_user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('user.members') }}">Members</a>

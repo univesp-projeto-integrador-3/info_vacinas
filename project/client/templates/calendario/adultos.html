@@ -3,8 +3,21 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Vacinas para adultos</h1>
+        <h1 class="jumbotron-heading">
+            {% if is_gestante is defined and is_gestante == '1' %}
+            Vacinas para adultas gestantes
+            {% else %}
+            Vacinas para adultos
+            {% endif %}
+        </h1>
         <p class="lead text-muted"></p>
+
+        {% if is_gestante is defined and is_gestante == '1' %}
+        <p>
+            <img src="{{url_for('static', filename='img/gestantes.png')}}" width="990">
+        </p>
+        {% endif %}
+
         <p>
             <img src="{{url_for('static', filename='img/adultos.png')}}" width="990">
         </p>
