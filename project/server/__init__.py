@@ -22,8 +22,7 @@ admin = Admin(template_mode='bootstrap4')
 
 
 def create_app(script_info=None):
-    from project.server.models import (CategoriaIdade, PeriodoIdade, User,
-                                       Vacina)
+    from project.server.models import Template, User
 
     # instantiate the app
     app = Flask(
@@ -59,12 +58,9 @@ def create_app(script_info=None):
     # flask-admin
     admin.add_view(ModelView(User, db.session,
                              endpoint='usuario_admin', name="Usuários"))
-    admin.add_view(ModelView(Vacina, db.session,
-                             endpoint='/vacina', name="Vacina"))
-    admin.add_view(ModelView(CategoriaIdade, db.session,
-                             endpoint='categoria_idade', name="Categoria idade"))
-    admin.add_view(ModelView(PeriodoIdade, db.session,
-                             endpoint='periodo_idade', name="Período idade"))
+
+    admin.add_view(ModelView(Template, db.session,
+                             endpoint='template', name="Template"))
 
     login_manager.login_view = "user.login"
     login_manager.login_message_category = "danger"

@@ -9,6 +9,30 @@ from project.server import bcrypt, db, login_manager
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
+class Template(db.Model):
+    __tablename__ = "template"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nome = db.Column(db.String(30), unique=True, nullable=False)
+    caminho = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, nome, caminho):
+        self.nome = nome
+        self.caminho = caminho
+
+    def get_id(self):
+        return self.id
+
+    def get_nome(self):
+        return self.nome
+
+    def get_caminho(self):
+        return self.caminho
+
+    def __repr__(self):
+        return "<Template {0}>".format(self.caminho)
+
+
 class User(db.Model):
 
     __tablename__ = "users"
