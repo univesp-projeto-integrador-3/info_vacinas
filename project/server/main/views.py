@@ -1,10 +1,12 @@
 # project/server/main/views.py
 from datetime import datetime
+from os import DirEntry
 
 from dateutil.relativedelta import relativedelta
 from flask import (Blueprint, Markup, flash, redirect, render_template,
                    request, url_for)
 from project.server.main.forms import ConsultaCalendarioForm
+from project.server.models import Template
 
 main_blueprint = Blueprint("main", __name__)
 
@@ -64,7 +66,7 @@ def consulta_calendario():
 
         # criança - >=0 and 4 anos
         if anos >= 0 and anos <= 4:
-            return render_template("calendario/criancas.html", is_gestante=is_gestante)
+            nome_template = 'crianças'
 
         if anos > 4 and anos < 9:
             # criança sem vacina - +4 e <9
@@ -74,29 +76,27 @@ def consulta_calendario():
             Dicas:
             </br>
             - Consulte o posto de vacinação mais próximo para verificar se há campanhas locais de imunização.</br>
-            -  Veja o calendário anterior se há alguma vacina faltante para imunização completa no quadro abaixo.            
+            - Veja o calendário anterior se há alguma vacina faltante para imunização completa no quadro abaixo.
             '''
             mensagem = Markup(mensagem)
             flash(mensagem, "warning")
-            return render_template("calendario/criancas.html", is_gestante=is_gestante)
+            nome_template = 'crianças'
 
         # adolescente - 9 a 19 anos
         if anos >= 9 and anos <= 19:
-            return render_template("calendario/adolescentes.html", is_gestante=is_gestante)
+            nome_template = 'adolescentes'
 
         # adulto - 20 A 59 anos
         if anos >= 20 and anos <= 59:
-            return render_template("calendario/adultos.html", is_gestante=is_gestante)
+            nome_template = 'adultos'
 
         # idoso += 60
         if anos >= 60:
-            return render_template("calendario/idosos.html", is_gestante=is_gestante)
+            nome_template = 'idosos'
 
-        # Tabela
-        # nome_grupo       caminho_pagina
-        # adolescentes     calendario/adolescentes.html
-        # criancas         calendario//criancas.html
-
-        print(anos)
+        # buscar no banco de dados o template correspondente a essa idade
+        template = Template.query.filter_by(nome=nome_template).first()
+        # usar o campo caminho da tabela template, para renderizar o conteúdo correspondente
+        return render_template(template.get_caminho(), is_gestante=is_gestante)
 
     return render_template("main/home.html", form=form)

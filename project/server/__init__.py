@@ -1,13 +1,14 @@
 # project/server/__init__.py
 import os
 
-from flask import Flask, render_template
+from flask import Flask, Markup, flash, redirect, render_template, url_for
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_bcrypt import Bcrypt
 from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
+from flask_login.utils import current_user
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -19,6 +20,14 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
 admin = Admin(template_mode='bootstrap4')
+
+
+class MyView(ModelView):
+    def index(self):
+        return self.render('admin/index.html')
+
+    def is_accessible(self):
+        return current_user.is_authenticated()
 
 
 def create_app(script_info=None):
@@ -55,12 +64,14 @@ def create_app(script_info=None):
     app.register_blueprint(user_blueprint)
     app.register_blueprint(main_blueprint)
 
-    # flask-admin
-    admin.add_view(ModelView(User, db.session,
-                             endpoint='usuario_admin', name="Usuários"))
+    # from flask_login import login_required
 
-    admin.add_view(ModelView(Template, db.session,
-                             endpoint='template', name="Template"))
+    # flask-admin
+    admin.add_view(MyView(User, db.session,
+                          endpoint='usuario_admin', name="Usuários"))
+
+    admin.add_view(MyView(Template, db.session,
+                          endpoint='template', name="Template"))
 
     login_manager.login_view = "user.login"
     login_manager.login_message_category = "danger"

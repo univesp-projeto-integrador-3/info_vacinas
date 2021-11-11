@@ -11,6 +11,7 @@ user_blueprint = Blueprint("user", __name__)
 
 
 @user_blueprint.route("/register", methods=["GET", "POST"])
+@login_required
 def register():
     form = RegisterForm(request.form)
     if form.validate_on_submit():
@@ -35,7 +36,7 @@ def login():
             user.password, request.form["password"]
         ):
             login_user(user)
-            flash("You are logged in. Welcome!", "success")
+            flash("Você foi autenticado com sucesso. Bem vindo!", "success")
             return redirect(url_for("user.members"))
         else:
             flash("Invalid email and/or password.", "danger")
