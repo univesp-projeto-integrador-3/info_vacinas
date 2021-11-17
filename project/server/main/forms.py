@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length
 class ConsultaCalendarioForm(FlaskForm):
     data_nascimento = DateField(
         "Data de nascimento", [DataRequired()])
-    is_gestante = SelectField(u'Você está gestante?', choices=[
+    is_gestante = SelectField(u'Você é gestante?', choices=[
         ('0', 'Não'),
         ('1', 'Sim')
     ])
