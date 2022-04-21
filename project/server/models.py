@@ -4,7 +4,7 @@ import datetime
 from flask import current_app
 from flask_login import AnonymousUserMixin, UserMixin
 from itsdangerous import BadSignature, SignatureExpired
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import URLSafeSerializer as Serializer
 from project.server import bcrypt, db, login_manager
 from werkzeug.security import check_password_hash, generate_password_hash
 
