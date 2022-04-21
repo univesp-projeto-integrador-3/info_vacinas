@@ -1,7 +1,9 @@
 # project/server/config.py
 
 import os
+
 from dotenv import load_dotenv
+
 load_dotenv()  # take environment variables from .env.
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -23,9 +25,10 @@ class DevelopmentConfig(BaseConfig):
 
     DEBUG_TB_ENABLED = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
-    os.environ["DATABASE_URL"] = os.environ.get("DATABASE_URL").replace('postgres:', 'postgresql:')
+    os.environ["DATABASE_URL"] = os.environ.get(
+        "DATABASE_URL").replace('postgres:', 'postgresql:')
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DATABASE_URL",
+        "DATABASE_URL_SQL_SERVER",
         "sqlite:///{0}".format(os.path.join(basedir, "dev.db"))
     )
 
@@ -46,9 +49,10 @@ class ProductionConfig(BaseConfig):
     """Production configuration."""
 
     BCRYPT_LOG_ROUNDS = 13
-    os.environ["DATABASE_URL"] = os.environ.get("DATABASE_URL").replace('postgres:', 'postgresql:')
+    os.environ["DATABASE_URL"] = os.environ.get(
+        "DATABASE_URL").replace('postgres:', 'postgresql:')
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DATABASE_URL",
+        "DATABASE_URL_SQL_SERVER",
         "sqlite:///{0}".format(os.path.join(basedir, "prod.db")),
     )
     WTF_CSRF_ENABLED = True
