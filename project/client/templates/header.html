@@ -16,6 +16,9 @@
       <!-- Main Navigation -->
       <ul class="navbar-nav">
         <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.sobre') }}">Sobre Nós</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ url_for('main.criancas') }}">Crianças</a>
         </li>
         <li class="nav-item">
@@ -30,9 +33,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('main.gestantes') }}">Gestantes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('main.sobre') }}">Sobre</a>
-        </li>
+        
 
         {% if current_user.is_authenticated %}
         <li class="nav-item dropdown">
