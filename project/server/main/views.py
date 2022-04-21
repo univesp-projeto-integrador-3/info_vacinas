@@ -1,12 +1,18 @@
 # project/server/main/views.py
+import os
 from datetime import datetime
 from os import DirEntry
 
+import requests
 from dateutil.relativedelta import relativedelta
+from dotenv import load_dotenv
 from flask import (Blueprint, Markup, flash, redirect, render_template,
                    request, url_for)
-from project.server.main.forms import ConsultaCalendarioForm
+from project.server.main.forms import ConsultaCalendarioForm, ConsultaUbsForm
 from project.server.models import Template
+
+load_dotenv()  # take environment variables from .env.
+
 
 main_blueprint = Blueprint("main", __name__)
 
@@ -14,6 +20,28 @@ main_blueprint = Blueprint("main", __name__)
 @main_blueprint.route("/")
 def home():
     return redirect(url_for("main.consulta_calendario"))
+
+
+@main_blueprint.route("/consulta_ubs", methods=["GET", "POST"])
+def consulta_ubs():
+    form = ConsultaUbsForm(request.form)
+
+    if form.validate_on_submit():
+        cep = form.cep.data
+        print('O cep digitado foi', cep)
+        # monta a url para consulta dos dados do cep na API
+        url = os.environ.get("API_CEP_URL")+cep.replace("-", "")
+        print('A url consultada foi', url)
+
+        headers = {
+            'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
+        response = requests.get(url, headers=headers)
+
+        dados_cep = response.json()
+
+        return render_template('main/resultado_consulta_ubs.html', cep=cep, dados_cep=dados_cep)
+
+    return render_template("main/consulta_ubs.html", form=form)
 
 
 @main_blueprint.route("/sobre")
@@ -96,7 +124,8 @@ def consulta_calendario():
 
         # buscar no banco de dados o template correspondente a essa idade
         template = Template.query.filter_by(nome=nome_template).first()
-        # usar o campo caminho da tabela template, para renderizar o conteúdo correspondente
+        # usar o campo caminho da tabela template, para renderizar o
+        # conteúdo correspondente
         return render_template(template.get_caminho(), is_gestante=is_gestante)
 
     return render_template("main/home.html", form=form)
