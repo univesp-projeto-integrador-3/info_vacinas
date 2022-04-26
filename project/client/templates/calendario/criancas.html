@@ -1,23 +1,18 @@
-{% extends "_base.html" %}
-{% block content %}
+{% extends "_base.html" %} {% block content %}
 
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">
-            {% if is_gestante is defined and is_gestante == '1' %}
-            Vacinas para crianças gestantes
-            {% else %}
-            Vacinas para crianças
-            {% endif %}
+            {% if is_gestante is defined and is_gestante == '1' %} Vacinas para crianças gestantes {% else %} Vacinas para crianças {% endif %}
         </h1>
         <p class="lead text-muted"></p>
         {% if is_gestante is defined and is_gestante == '1' %}
         <p>
-            <img src="{{url_for('static', filename='img/gestantes.png')}}" width="990">
+            <img src="{{url_for('static', filename='img/gestantes.png')}}" width="70%" height="70%">
         </p>
         {% endif %}
         <p>
-            <img src="{{url_for('static', filename='img/crianças.png')}}" width="990">
+            <img src="{{url_for('static', filename='img/crianças.png')}}" width="70%" height="70%">
         </p>
     </div>
 </section>
