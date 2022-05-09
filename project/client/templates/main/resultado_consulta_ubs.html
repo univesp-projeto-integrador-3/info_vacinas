@@ -20,7 +20,13 @@
 
         <a href="https://maps.google.com/?q={{ dados_cep.latitude }},{{ dados_cep.longitude }}" target="_blank">
             Google Maps
-        </a>
+        </a> {% for row in rows %}
+        <tr>
+            <td>{{ row }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
 
     </div>
 </div>

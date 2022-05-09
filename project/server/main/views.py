@@ -60,17 +60,18 @@ def consulta_ubs():
         ASC
         '''
 
-        print(sql)
+        rows = []
 
         try:
-            db.engine.execute(sql)
+            rows = db.engine.execute(sql)
         except:
             print('Erro executando sql', sql)
 
         return render_template(
             'main/resultado_consulta_ubs.html',
             cep=cep,
-            dados_cep=dados_cep
+            dados_cep=dados_cep,
+            rows=rows
         )
 
     return render_template("main/consulta_ubs.html", form=form)
