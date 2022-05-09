@@ -43,9 +43,9 @@ def consulta_ubs():
         dados_cep = response.json()
 
         # consulta ubs mais próximas
-        lat = dados_cep.latitude
-        lng = dados_cep.longitude
-        ibge = dados_cep.cidade.ibge
+        lat = dados_cep.get('latitude')
+        lng = dados_cep.get('longitude')
+        ibge = dados_cep.get('cidade').get('ibge')
         sql = f'''
         SELECT DISTINCT TOP 10
             *,
