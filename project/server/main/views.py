@@ -9,6 +9,7 @@ from dateutil.relativedelta import relativedelta
 from dotenv import load_dotenv
 from flask import (Blueprint, Markup, flash, redirect, render_template,
                    request, url_for)
+from project.server import db
 from project.server.main.forms import ConsultaCalendarioForm, ConsultaUbsForm
 from project.server.models import Template
 from sqlalchemy import lateral
@@ -60,6 +61,11 @@ def consulta_ubs():
         '''
 
         print(sql)
+
+        try:
+            db.engine.execute(sql)
+        except:
+            print('Erro executando sql', sql)
 
         return render_template(
             'main/resultado_consulta_ubs.html',
