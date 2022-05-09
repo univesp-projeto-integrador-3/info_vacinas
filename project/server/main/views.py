@@ -54,7 +54,7 @@ def consulta_ubs():
             [dbo].[cadastro_estabelecimentos_cnes]
         WHERE
             IBGE = LEFT({ibge}, 6) AND
-            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) < 0.05
+            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) < 5
         ORDER BY
             Distance
         ASC
