@@ -22,33 +22,34 @@
             Google Maps
         </a>
 
-        <h3>Unidades mais próximas</h3>
+        <div class="row">
+            <h3 class="text-center">Lista das Unidades de Saúde mais próximas</h3>
 
-        <table class="table table-condensed table-striped">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Bairro</th>
-                    <th>Link Google Maps</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in rows %}
-                <tr>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                    <td>{{ row[5] }}</td>
-                    <td>
-                        <a href="https://maps.google.com/?q={{ row[6] }},{{ row[7] }}" target="_blank">
-                            Google Maps
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+            <table class="table table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                        <th>Bairro</th>
+                        <th>Link Google Maps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>
+                            <a href="https://maps.google.com/?q={{ row[6] }},{{ row[7] }}" target="_blank">
+                                Google Maps
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
