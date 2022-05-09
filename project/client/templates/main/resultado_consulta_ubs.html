@@ -20,13 +20,28 @@
 
         <a href="https://maps.google.com/?q={{ dados_cep.latitude }},{{ dados_cep.longitude }}" target="_blank">
             Google Maps
-        </a> {% for row in rows %}
-        <tr>
-            <td>{{ row }}</td>
-            <td></td>
-            <td></td>
-        </tr>
-        {% endfor %}
+        </a>
+
+        <h3>Unidades mais próximas</h3>
+
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
     </div>
 </div>
