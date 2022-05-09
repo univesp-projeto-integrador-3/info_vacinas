@@ -30,6 +30,7 @@
                     <th>Nome</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
+                    <th>Link Google Maps</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +39,11 @@
                     <td>{{ row[3] }}</td>
                     <td>{{ row[4] }}</td>
                     <td>{{ row[5] }}</td>
+                    <td>
+                        <a href="https://maps.google.com/?q={{ row[6] }},{{ row[7] }}" target="_blank">
+                            Google Maps
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
