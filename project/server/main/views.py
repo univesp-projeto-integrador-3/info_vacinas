@@ -1,6 +1,7 @@
 # project/server/main/views.py
 import os
 from datetime import datetime
+from gettext import lngettext
 from os import DirEntry
 
 import requests
@@ -10,6 +11,7 @@ from flask import (Blueprint, Markup, flash, redirect, render_template,
                    request, url_for)
 from project.server.main.forms import ConsultaCalendarioForm, ConsultaUbsForm
 from project.server.models import Template
+from sqlalchemy import lateral
 
 load_dotenv()  # take environment variables from .env.
 
@@ -39,7 +41,31 @@ def consulta_ubs():
 
         dados_cep = response.json()
 
-        return render_template('main/resultado_consulta_ubs.html', cep=cep, dados_cep=dados_cep)
+        # consulta ubs mais próximas
+        lat = dados_cep.latitude
+        lng = dados_cep.longitude
+        ibge = dados_cep.cidade.ibge
+        sql = f'''
+        SELECT DISTINCT TOP 10
+            *,
+            sqrt(square(abs(Latitude-{lat})) + square(abs(Longitude-{lng}))) as Distance
+        FROM
+            [dbo].[cadastro_estabelecimentos_cnes]
+        WHERE
+            IBGE = LEFT({ibge}, 6) AND
+            sqrt(square(abs(Latitude-{lat})) + square(abs(Longitude-{lng}))) < 0.05
+        ORDER BY
+            Distance
+        ASC
+        '''
+
+        print(sql)
+
+        return render_template(
+            'main/resultado_consulta_ubs.html',
+            cep=cep,
+            dados_cep=dados_cep
+        )
 
     return render_template("main/consulta_ubs.html", form=form)
 
