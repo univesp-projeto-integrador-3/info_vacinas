@@ -60,6 +60,8 @@ def consulta_ubs():
         ASC
         '''
 
+        print(sql)
+
         rows = []
 
         try:
