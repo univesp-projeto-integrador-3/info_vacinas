@@ -73,7 +73,8 @@ def consulta_ubs():
             'main/resultado_consulta_ubs.html',
             cep=cep,
             dados_cep=dados_cep,
-            rows=rows
+            rows=rows,
+            sql=sql
         )
 
     return render_template("main/consulta_ubs.html", form=form)
