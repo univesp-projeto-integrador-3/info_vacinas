@@ -165,3 +165,119 @@ def consulta_calendario():
         return render_template(template.get_caminho(), is_gestante=is_gestante)
 
     return render_template("main/home.html", form=form)
+
+# criar uma "API" que retorna as UFs onde existem unidades de saúde
+@main_blueprint.route("/ubs_uf", methods=["GET"])
+def ubs_ufs():
+    sql = f'''
+        SELECT
+            DISTINCT UF
+        FROM
+            univesp.dbo.unidades_vacinacao;
+    '''
+
+    rows = []
+
+    try:
+        rows = db.engine.execute(sql)
+    except:
+        print('Erro executando sql', sql)
+
+    return render_template(
+        'main/ubs_formulario_endereco.html',
+        rows=rows
+    )
+
+# criar uma "API" que retorna as cidades onde existem unidades de saúde
+# de acordo com a UF de entrada
+@main_blueprint.route("/ubs_cidades", methods=["GET"])
+def ubs_cidades():
+    uf = request.args.get('uf', default='SP', type=str)
+    sql = f'''
+        SELECT DISTINCT
+            MUNICIPIO
+        FROM
+            univesp.dbo.unidades_vacinacao
+        WHERE 
+            UF = '{uf}'
+        ORDER BY 
+            MUNICIPIO
+    '''
+
+    rows = []
+
+    try:
+        rows = db.engine.execute(sql)
+    except:
+        print('Erro executando sql', sql)
+
+    return render_template(
+        'main/ubs_formulario_endereco.html',
+        rows=rows
+    )
+
+# criar uma "API" que retorna os bairros onde existem unidades de saúde
+# de acordo com a UF e o Município
+@main_blueprint.route("/ubs_bairros", methods=["GET"])
+def ubs_bairros():
+    uf = request.args.get('uf', default='SP', type=str)
+    municipio = request.args.get(
+        'municipio', default='SAO PAULO', type=str)
+    sql = f'''
+        SELECT DISTINCT
+            BAIRRO
+        FROM
+            univesp.dbo.unidades_vacinacao
+        WHERE 
+            UF = '{uf}' AND 
+            MUNICIPIO = '{municipio}'
+        ORDER BY 
+            BAIRRO
+    '''
+
+    rows = []
+
+    try:
+        rows = db.engine.execute(sql)
+    except:
+        print('Erro executando sql', sql)
+
+    return render_template(
+        'main/ubs_formulario_endereco.html',
+        rows=rows
+    )
+
+# criar uma "API" que retorna as ubs de acordo com a UF, Munício e Bairro
+@main_blueprint.route("/ubs_lista", methods=["GET"])
+def ubs_lista():
+    uf = request.args.get('uf', default='SP', type=str)
+    municipio = request.args.get(
+        'municipio', default='SAO PAULO', type=str)
+    bairro = request.args.get('bairro', default='PENHA', type=str)
+    sql = f'''
+        SELECT
+            UF,
+            MUNICIPIO,
+            ESTABELECIMENTO,
+            LOGRADOURO,
+            NUMERO,
+            BAIRRO
+        FROM
+            univesp.dbo.unidades_vacinacao
+        WHERE 
+            UF = '{uf}' AND
+            MUNICIPIO = '{municipio}' AND
+            BAIRRO	= '{bairro}'
+    '''
+
+    rows = []
+
+    try:
+        rows = db.engine.execute(sql)
+    except:
+        print('Erro executando sql', sql)
+
+    return render_template(
+        'main/ubs_formulario_endereco.html',
+        rows=rows
+    )
