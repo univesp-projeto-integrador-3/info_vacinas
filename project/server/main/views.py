@@ -7,8 +7,8 @@ from os import DirEntry
 import requests
 from dateutil.relativedelta import relativedelta
 from dotenv import load_dotenv
-from flask import (Blueprint, Markup, flash, redirect, render_template,
-                   request, url_for)
+from flask import (Blueprint, Markup, flash, jsonify, redirect,
+                   render_template, request, url_for)
 from project.server import db
 from project.server.main.forms import ConsultaCalendarioForm, ConsultaUbsForm
 from project.server.models import Template
@@ -166,6 +166,13 @@ def consulta_calendario():
 
     return render_template("main/home.html", form=form)
 
+
+# formulário para consulta de unidades de saúde
+@main_blueprint.route("/consulta_ubs_por_endereco", methods=["GET"])
+def consulta_ubs_por_endereco():
+    return render_template("main/ubs_formulario_endereco.html")
+
+
 # criar uma "API" que retorna as UFs onde existem unidades de saúde
 @main_blueprint.route("/ubs_uf", methods=["GET"])
 def ubs_ufs():
@@ -173,7 +180,10 @@ def ubs_ufs():
         SELECT
             DISTINCT UF
         FROM
-            univesp.dbo.unidades_vacinacao;
+            univesp.dbo.unidades_vacinacao
+        ORDER BY
+            UF
+        ;
     '''
 
     rows = []
@@ -183,10 +193,8 @@ def ubs_ufs():
     except:
         print('Erro executando sql', sql)
 
-    return render_template(
-        'main/ubs_formulario_endereco.html',
-        rows=rows
-    )
+    return jsonify({'result': [dict(row) for row in rows]})
+
 
 # criar uma "API" que retorna as cidades onde existem unidades de saúde
 # de acordo com a UF de entrada
@@ -211,10 +219,8 @@ def ubs_cidades():
     except:
         print('Erro executando sql', sql)
 
-    return render_template(
-        'main/ubs_formulario_endereco.html',
-        rows=rows
-    )
+    return jsonify({'result': [dict(row) for row in rows]})
+
 
 # criar uma "API" que retorna os bairros onde existem unidades de saúde
 # de acordo com a UF e o Município
@@ -242,12 +248,11 @@ def ubs_bairros():
     except:
         print('Erro executando sql', sql)
 
-    return render_template(
-        'main/ubs_formulario_endereco.html',
-        rows=rows
-    )
+    return jsonify({'result': [dict(row) for row in rows]})
+
 
 # criar uma "API" que retorna as ubs de acordo com a UF, Munício e Bairro
+# http://127.0.0.1:5000/ubs_lista?uf=RS&municipio=ALECRIM&bairro=CENTRO
 @main_blueprint.route("/ubs_lista", methods=["GET"])
 def ubs_lista():
     uf = request.args.get('uf', default='SP', type=str)
@@ -277,7 +282,4 @@ def ubs_lista():
     except:
         print('Erro executando sql', sql)
 
-    return render_template(
-        'main/ubs_formulario_endereco.html',
-        rows=rows
-    )
+    return jsonify({'result': [dict(row) for row in rows]})

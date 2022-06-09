@@ -1,12 +1,99 @@
-{% extends "_base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
+{% extends '_base.html' %} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
 
-<div class="body-content">
-    <div>
-        <p>&nbsp</p>
-        <div class="row">
-            <code>{{ rows }}</code>
-        </div>
+<link href="{{url_for('static', filename='floating-labels.css')}}" rel="stylesheet" media="screen">
+
+<section class="jumbotron text-center">
+    <div class="container">
+
+        <img class="mb-4" src="{{url_for('static', filename='img/icone_vacina_2.png')}}" width="330" height="85">
+
+        <h1 class="jumbotron-heading">Consulta Unidades Básicas de Saúde - Por endereço</h1>
+        <p class="lead text-muted">
+            Consulta a UBS mais próxima através do formulário abaixo
+            <form class="form-signin" role="form" method="POST" action="{{ url_for('main.consulta_ubs') }}">
+        </p>
+        <p>
+
+            <div class="form-group ">
+                <label class="control-label" for="uf">UF</label>
+                <select class="form-control select2" id="uf" name="uf">
+                </select>
+            </div>
+
+            <div class="form-group ">
+                <label class="control-label" for="municipio">Município</label>
+                <select class="form-control select2" id="municipio" name="municipio">
+                </select>
+            </div>
+
+            <div class="form-group ">
+                <label class="control-label" for="bairro">Bairro</label>
+                <select class="form-control select2" id="bairro" name="bairro">
+                </select>
+            </div>
+
+            <p></p>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Consultar</button>
+
+            </form>
+        </p>
     </div>
-</div>
+</section>
+
+<script>
+    $(function() {
+        var url_uf = "http://127.0.0.1:5000/ubs_uf";
+
+        fetch(url_uf)
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                // Work with JSON data here
+                for (var index = 0; index <= data.result.length; index++) {
+                    console.log(data.result[index])
+                    $('#uf').append('<option value="' + data.result[index].UF + '">' + data.result[index].UF + '</option>');
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+        var url_uf = "http://127.0.0.1:5000/ubs_cidades?uf=SP";
+
+        fetch(url_uf)
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                // Work with JSON data here
+                for (var index = 0; index <= data.result.length; index++) {
+                    console.log(data.result[index])
+                    $('#municipio').append('<option value="' + data.result[index].MUNICIPIO + '">' + data.result[index].MUNICIPIO + '</option>');
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+        var url_uf = "http://127.0.0.1:5000/ubs_bairros?uf=SP&municipio=SAo%20PAULO";
+
+        fetch(url_uf)
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                // Work with JSON data here
+                for (var index = 0; index <= data.result.length; index++) {
+                    console.log(data.result[index])
+                    $('#bairro').append('<option value="' + data.result[index].BAIRRO + '">' + data.result[index].BAIRRO + '</option>');
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    });
+</script>
 
 {% endblock %}
