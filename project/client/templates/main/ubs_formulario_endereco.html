@@ -43,7 +43,7 @@
 
 <script>
     $(function() {
-        var url_uf = "http://127.0.0.1:5000/ubs_uf";
+        var url_uf = "https://info-vacinas.herokuapp.com/ubs_uf";
 
         fetch(url_uf)
             .then((response) => {
@@ -60,7 +60,7 @@
                 console.log(err)
             })
 
-        var url_uf = "http://127.0.0.1:5000/ubs_cidades?uf=SP";
+        var url_uf = "https://info-vacinas.herokuapp.com/ubs_cidades?uf=SP";
 
         fetch(url_uf)
             .then((response) => {
@@ -77,7 +77,7 @@
                 console.log(err)
             })
 
-        var url_uf = "http://127.0.0.1:5000/ubs_bairros?uf=SP&municipio=SAo%20PAULO";
+        var url_uf = "https://info-vacinas.herokuapp.com/ubs_bairros?uf=SP&municipio=SAo%20PAULO";
 
         fetch(url_uf)
             .then((response) => {
