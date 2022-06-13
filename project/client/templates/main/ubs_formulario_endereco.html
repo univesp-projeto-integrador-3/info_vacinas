@@ -10,7 +10,7 @@
         <h1 class="jumbotron-heading">Consulta Unidades Básicas de Saúde - Por endereço</h1>
         <p class="lead text-muted">
             Consulta a UBS mais próxima através do formulário abaixo
-            <form class="form-signin" role="form" method="POST" action="{{ url_for('main.consulta_ubs') }}">
+            <form class="form-signin" role="form" method="GET" action="{{ url_for('main.ubs_lista') }}">
         </p>
         <p>
 
@@ -43,6 +43,8 @@
 
 <script>
     $(function() {
+
+
         var url_uf = "https://info-vacinas.herokuapp.com/ubs_uf";
 
         fetch(url_uf)
@@ -50,6 +52,7 @@
                 return response.json()
             })
             .then((data) => {
+                $('#uf').append('<option value="">Selecione</option>');
                 // Work with JSON data here
                 for (var index = 0; index <= data.result.length; index++) {
                     console.log(data.result[index])
@@ -60,39 +63,68 @@
                 console.log(err)
             })
 
-        var url_uf = "https://info-vacinas.herokuapp.com/ubs_cidades?uf=SP";
 
-        fetch(url_uf)
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                // Work with JSON data here
-                for (var index = 0; index <= data.result.length; index++) {
-                    console.log(data.result[index])
-                    $('#municipio').append('<option value="' + data.result[index].MUNICIPIO + '">' + data.result[index].MUNICIPIO + '</option>');
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        $('#uf').on('change', function() {
+            console.log('selecionei elemento uf')
+            var uf = $('#uf').val()
+                // pega a UF, chamar a url q retonar as cidades e carregar o select das cidades
+            var url_uf = "https://info-vacinas.herokuapp.com/ubs_cidades?uf=" + uf;
 
-        var url_uf = "https://info-vacinas.herokuapp.com/ubs_bairros?uf=SP&municipio=SAo%20PAULO";
+            // limpa os elementos de municipios antes de carregar os dados
+            $("#municipio").empty();
 
-        fetch(url_uf)
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                // Work with JSON data here
-                for (var index = 0; index <= data.result.length; index++) {
-                    console.log(data.result[index])
-                    $('#bairro').append('<option value="' + data.result[index].BAIRRO + '">' + data.result[index].BAIRRO + '</option>');
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+            $('#municipio').append('<option value="">Selecione</option>');
+
+            fetch(url_uf)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((data) => {
+                    // Work with JSON data here
+                    for (var index = 0; index <= data.result.length; index++) {
+                        console.log(data.result[index])
+                        $('#municipio').append('<option value="' + data.result[index].MUNICIPIO + '">' + data.result[index].MUNICIPIO + '</option>');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        });
+
+        $('#municipio').on('change', function() {
+            console.log('selecionei elemento municipio')
+            var uf = $('#uf').val()
+            var municipio = $('#municipio').val()
+                // limpa os elementos de municipios antes de carregar os dados
+            $("#bairro").empty();
+
+            var url_uf = "https://info-vacinas.herokuapp.com/ubs_bairros?uf=" + uf + "&municipio=" + municipio;
+
+            $('#bairro').append('<option value="Todos">Todos</option>');
+
+            fetch(url_uf)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((data) => {
+                    // Work with JSON data here
+                    for (var index = 0; index <= data.result.length; index++) {
+                        console.log(data.result[index])
+                        $('#bairro').append('<option value="' + data.result[index].BAIRRO + '">' + data.result[index].BAIRRO + '</option>');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+
+        });
+
+        $('#bairro').on('change', function() {
+            console.log('selecionei elemento bairro')
+            $('#bairro').val()
+        });
+
+
     });
 </script>
 

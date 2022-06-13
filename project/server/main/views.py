@@ -265,6 +265,7 @@ def ubs_lista():
     municipio = request.args.get(
         'municipio', default='SAO PAULO', type=str)
     bairro = request.args.get('bairro', default='PENHA', type=str)
+
     sql = f'''
         SELECT
             UF,
@@ -281,6 +282,22 @@ def ubs_lista():
             BAIRRO	= '{bairro}'
     '''
 
+    if bairro == 'Todos':
+        sql = f'''
+            SELECT
+                UF,
+                MUNICIPIO,
+                ESTABELECIMENTO,
+                LOGRADOURO,
+                NUMERO,
+                BAIRRO
+            FROM
+                univesp.dbo.unidades_vacinacao
+            WHERE 
+                UF = '{uf}' AND
+                MUNICIPIO = '{municipio}'
+        '''
+
     rows = []
 
     try:
@@ -288,6 +305,10 @@ def ubs_lista():
     except:
         print('Erro executando sql', sql)
 
-    response = jsonify({'result': [dict(row) for row in rows]})
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    return response
+    return render_template(
+        'main/resultado_consulta_ubs_por_municipio_bairro.html',
+        uf=uf,
+        municipio=municipio,
+        bairro=bairro,
+        rows=rows,
+    )
