@@ -193,7 +193,9 @@ def ubs_ufs():
     except:
         print('Erro executando sql', sql)
 
-    return jsonify({'result': [dict(row) for row in rows]})
+    response = jsonify({'result': [dict(row) for row in rows]})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 # criar uma "API" que retorna as cidades onde existem unidades de saúde
@@ -219,7 +221,9 @@ def ubs_cidades():
     except:
         print('Erro executando sql', sql)
 
-    return jsonify({'result': [dict(row) for row in rows]})
+    response = jsonify({'result': [dict(row) for row in rows]})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 # criar uma "API" que retorna os bairros onde existem unidades de saúde
@@ -248,7 +252,9 @@ def ubs_bairros():
     except:
         print('Erro executando sql', sql)
 
-    return jsonify({'result': [dict(row) for row in rows]})
+    response = jsonify({'result': [dict(row) for row in rows]})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 # criar uma "API" que retorna as ubs de acordo com a UF, Munício e Bairro
@@ -282,4 +288,6 @@ def ubs_lista():
     except:
         print('Erro executando sql', sql)
 
-    return jsonify({'result': [dict(row) for row in rows]})
+    response = jsonify({'result': [dict(row) for row in rows]})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
