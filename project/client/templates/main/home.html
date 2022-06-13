@@ -1,49 +1,43 @@
-{% extends '_base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% block content %}
+{% extends '_base.html' %} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
 
 <link href="{{url_for('static', filename='floating-labels.css')}}" rel="stylesheet" media="screen">
 
 <section class="jumbotron text-center">
-  <div class="container">
-    <img class="mb-4" src="{{url_for('static', filename='img/icone_vacina_2.png')}}" width="330" height="85">
-    <h1 class="jumbotron-heading">Calendário de vacinas</h1>
-    <p class="lead text-muted">
-      Preencha o formulário para consultar o calendário de vacinas da sua faixa etária
+    <div class="container">
+        <img class="mb-4" src="{{url_for('static', filename='img/icone_vacina_2.png')}}" width="330" height="85">
+        <h1 class="jumbotron-heading">Calendário de vacinas</h1>
+        <p class="lead text-muted">
+            Preencha o formulário para consultar o calendário de vacinas da sua faixa etária
 
-    <form class="form-signin" role="form" method="post" action="{{ url_for('main.consulta_calendario') }}">
-      {{ form.csrf_token }}
-      {{ form.hidden_tag() }}
-      {{ wtf.form_errors(form, hiddens="only") }}
+            <form class="form-signin" role="form" method="post" action="{{ url_for('main.consulta_calendario') }}">
+                {{ form.csrf_token }} {{ form.hidden_tag() }} {{ wtf.form_errors(form, hiddens="only") }}
 
-      <div class="text-center mb-4">
-      <!-- <a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-de-vacinacao"
+                <div class="text-center mb-4">
+                    <!-- <a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/c/calendario-de-vacinacao"
           target="_blank">Consulte aqui o calendário nacional de vacinação</a> -->
+
+                    <div class="form-group">
+                        {{ wtf.form_field(form.data_nascimento) }}
+                    </div>
+
+                    <div class="form-label-group">
+                        {{ wtf.form_field(form.is_gestante) }}
+                    </div>
+
+                    <p></p>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Consultar</button>
+
+            </form>
         </p>
-        <p>
-
- >       <div class="form-group">
-          {{ wtf.form_field(form.data_nascimento) }}
         </div>
-
-        <div class="form-label-group">
-          {{ wtf.form_field(form.is_gestante) }}
-        </div>
-
-        <p></p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Consultar</button>
-
-    </form>
-    </p>
-  </div>
 </section>
 
 <script>
-  Swal.fire({
-    icon: 'info',
-    title: 'Atenção',
-    html: '<p>Para informações específicas da vacina contra a COVID 19, acesse o site abaixo.</p><p><a target="_blank" href="https://vacinaja.sp.gov.br/">Vacina Já | Governo do Estado de São Paulo</a></p>'
-  })
+    Swal.fire({
+        icon: 'info',
+        title: 'Atenção',
+        html: '<p>Para informações específicas da vacina contra a COVID 19, acesse o site abaixo.</p><p><a target="_blank" href="https://vacinaja.sp.gov.br/">Vacina Já | Governo do Estado de São Paulo</a></p>'
+    })
 </script>
 
 {% endblock %}
