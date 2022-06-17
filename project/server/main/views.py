@@ -5,6 +5,7 @@ from gettext import lngettext
 from os import DirEntry
 
 import requests
+import unidecode
 from dateutil.relativedelta import relativedelta
 from dotenv import load_dotenv
 from flask import (Blueprint, Markup, flash, jsonify, redirect,
@@ -42,25 +43,46 @@ def consulta_ubs():
 
         dados_cep = response.json()
 
-        # consulta ubs mais próximas
-        lat = dados_cep.get('latitude')
-        lng = dados_cep.get('longitude')
-        ibge = dados_cep.get('cidade').get('ibge')
+        # consulta ubs da mesma cidade do cep pesquisado
+        municipio = unidecode.unidecode(
+            dados_cep.get('cidade').get('nome')).upper()
+        uf = dados_cep.get('estado').get('sigla').upper()
+        bairro = unidecode.unidecode(
+            dados_cep.get('bairro')).upper()
+
         sql = f'''
-        SELECT DISTINCT TOP 10
-            *,
-            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) as Distance
-        FROM
-            [dbo].[cadastro_estabelecimentos_cnes]
-        WHERE
-            IBGE = LEFT({ibge}, 6) AND
-            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) < 5
-        ORDER BY
-            Distance
-        ASC
+            SELECT
+                UF,
+                MUNICIPIO,
+                ESTABELECIMENTO,
+                LOGRADOURO,
+                NUMERO,
+                BAIRRO
+            FROM
+                univesp.dbo.unidades_vacinacao
+            WHERE 
+                UF = '{uf}' AND
+                MUNICIPIO = '{municipio}' AND
+                BAIRRO	= '{bairro}'
         '''
 
-        print(sql)
+        bairro = 'Todos'
+
+        if bairro == 'Todos':
+            sql = f'''
+                SELECT
+                    UF,
+                    MUNICIPIO,
+                    ESTABELECIMENTO,
+                    LOGRADOURO,
+                    NUMERO,
+                    BAIRRO
+                FROM
+                    univesp.dbo.unidades_vacinacao
+                WHERE 
+                    UF = '{uf}' AND
+                    MUNICIPIO = '{municipio}'
+            '''
 
         rows = []
 
@@ -70,11 +92,13 @@ def consulta_ubs():
             print('Erro executando sql', sql)
 
         return render_template(
-            'main/resultado_consulta_ubs.html',
+            'main/resultado_consulta_ubs_por_municipio_bairro.html',
             cep=cep,
             dados_cep=dados_cep,
+            uf=uf,
+            municipio=municipio,
+            bairro=bairro,
             rows=rows,
-            sql=sql
         )
 
     return render_template("main/consulta_ubs.html", form=form)

@@ -3,45 +3,41 @@
 <div class="body-content">
     <div>
         <h3 class="text-center">Resultado - Unidades de Saúde</h3>
-
-        <h4 class="text-center">UF: {{ uf }}</h4>
-        <h4 class="text-center">Município: {{ municipio }}</h4>
-        <h4 class="text-center">Bairro: {{ bairro }}</h4>
-
         <hr>
-
         <p>&nbsp</p>
+        <h4 class="text-center">Bairro: {{ bairro }} - Município: {{ municipio }} - {{ uf }}</h4>
 
-        <div class="row">
-            <h3 class="text-center">Lista das Unidades de Saúde</h3>
+        {% if cep is defined %}
+        <h5 class="text-center">CEP: {{ cep }} - {{ dados_cep.logradouro }} - {{ dados_cep.bairro }}</h5>
+        {% endif %}
 
-            <table class="table table-condensed table-striped" id="lista_ubs">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Endereço</th>
-                        <th>Bairro</th>
-                        <th>Link Google Maps</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in rows %}
-                    <tr>
-                        <td>{{ row[3] }}</td>
-                        <td>{{ row[4] }}</td>
-                        <td>{{ row[5] }}</td>
-                        <td>
-                            <a href="https://maps.google.com/?q={{ row[6] }},{{ row[7] }}" target="_blank">
-                                Google Maps
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-
+        <table class="table table-condensed table-striped" id="lista_ubs">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Município</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ municipio }}</td>
+                    <!-- https://developers.google.com/maps/documentation/urls/get-started#search-parameters -->
+                    <td>
+                        <a title="Consultar Mapa do Local" href="https://maps.google.com/?q={{ row[3] }}+{{ row[4] }}+{{ row[5] }}+{{ municipio }}+{{ uf }}" target="_blank">
+                            <span class="oi oi-map"></span>&nbsp;Mapa
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -51,7 +47,7 @@
             order: [
                 [2, 'asc']
             ],
-            "iDisplayLength": 50
+            "iDisplayLength": 20
         });
     });
 </script>
