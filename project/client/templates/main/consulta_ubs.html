@@ -7,9 +7,9 @@
 
         <img class="mb-4" src="{{url_for('static', filename='img/icone_vacina_2.png')}}" width="330" height="85">
 
-        <h1 class="jumbotron-heading">Consulta Unidades Básicas de Saúde</h1>
+        <h2 class="jumbotron-heading">Consulta Unidades Básicas de Saúde</h2>
         <p class="lead text-muted">
-            Preencha o seu CEP para consultar as unidades de saúde mais próximas do seu endereço
+            Preencha o CEP desejado para consultar as unidades de saúde próximas
 
             <form class="form-signin" role="form" method="POST" action="{{ url_for('main.consulta_ubs') }}">
                 {{ form.csrf_token }} {{ form.hidden_tag() }} {{ wtf.form_errors(form, hiddens="only") }}
