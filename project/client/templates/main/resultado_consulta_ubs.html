@@ -56,4 +56,19 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#lista_ubs').DataTable({
+            order: [
+                [2, 'asc']
+            ],
+            "iDisplayLength": 20,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+            }
+            
+        });
+    });
+</script>
+
 {% endblock %}
