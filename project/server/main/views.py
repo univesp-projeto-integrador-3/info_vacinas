@@ -336,3 +336,55 @@ def ubs_lista():
         bairro=bairro,
         rows=rows,
     )
+
+
+@main_blueprint.route("/consulta_ubs_mais_proxima", methods=["GET", "POST"])
+def consulta_ubs_mais_proxima():
+    form = ConsultaUbsForm(request.form)
+
+    if form.validate_on_submit():
+        cep = form.cep.data
+        print('O cep digitado foi', cep)
+        # monta a url para consulta dos dados do cep na API
+        url = os.environ.get("API_CEP_URL")+cep.replace("-", "")
+        print('A url consultada foi', url)
+
+        headers = {
+            'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
+        response = requests.get(url, headers=headers)
+
+        dados_cep = response.json()
+
+        # consulta ubs mais próximas
+        lat = dados_cep.get('latitude')
+        lng = dados_cep.get('longitude')
+        ibge = dados_cep.get('cidade').get('ibge')
+        sql = f'''
+        SELECT DISTINCT TOP 10
+            *,
+            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) as Distance
+        FROM
+            [dbo].[cadastro_estabelecimentos_cnes]
+        WHERE
+            IBGE = LEFT({ibge}, 6) AND
+            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) < 5
+        ORDER BY
+            Distance
+        ASC
+        '''
+
+        rows = []
+
+        try:
+            rows = db.engine.execute(sql)
+        except:
+            print('Erro executando sql', sql)
+
+        return render_template(
+            'main/resultado_consulta_ubs.html',
+            cep=cep,
+            dados_cep=dados_cep,
+            rows=rows
+        )
+
+    return render_template("main/consulta_ubs.html", form=form)

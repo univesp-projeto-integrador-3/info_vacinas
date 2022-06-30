@@ -27,7 +27,7 @@
         <div class="row">
             <h3 class="text-center">Lista das Unidades de Saúde mais próximas</h3>
 
-            <table class="table table-condensed table-striped">
+            <table class="table table-condensed table-striped" id="lista_ubs">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -55,5 +55,16 @@
 
     </div>
 </div>
+
+<!--<script>
+    $(document).ready(function() {
+        $('#lista_ubs').DataTable({
+            "order": [
+                [2, 'asc']
+            ],
+            "iDisplayLength": 20
+        });
+    });
+</script> -->
 
 {% endblock %}
