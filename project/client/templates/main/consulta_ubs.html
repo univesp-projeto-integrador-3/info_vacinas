@@ -9,7 +9,8 @@
 
         <h2 class="jumbotron-heading">Consulta Unidades Básicas de Saúde</h2>
         <p class="lead text-muted">
-            Preencha o CEP desejado para consultar as unidades de saúde próximas
+
+            {% if subtitulo is defined %} {{ subtitulo }} {% else %} Preencha o CEP desejado para consultar as unidades de saúde próximas {% endif %}
 
             <form class="form-signin" role="form" method="POST" action="{{ url_for('main.consulta_ubs') }}">
                 {{ form.csrf_token }} {{ form.hidden_tag() }} {{ wtf.form_errors(form, hiddens="only") }}
