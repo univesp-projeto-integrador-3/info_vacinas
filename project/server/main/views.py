@@ -41,6 +41,12 @@ def consulta_ubs():
             'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
         response = requests.get(url, headers=headers)
 
+        # erro na API de CEP
+        if response.status_code != 200:
+            msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
+            flash(msg, "danger")
+            return render_template("main/consulta_ubs.html", form=form)
+
         dados_cep = response.json()
 
         # consulta ubs da mesma cidade do cep pesquisado
@@ -352,6 +358,12 @@ def consulta_ubs_mais_proxima():
         headers = {
             'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
         response = requests.get(url, headers=headers)
+
+        # erro na API de CEP
+        if response.status_code != 200:
+            msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
+            flash(msg, "danger")
+            return render_template("main/consulta_ubs.html", form=form)
 
         dados_cep = response.json()
 
