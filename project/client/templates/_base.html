@@ -105,7 +105,19 @@
             {% include 'footer.html' %} {% block js %}{% endblock %}
     </div>
 
-    
+    <script>
+        document.getElementById("compartilhe").addEventListener("click",exibeQrCode);
+        function exibeQrCode() {
+            Swal.fire({
+                title: 'Compartilhe!',
+                text: 'Aponte a câmera do seu dispositivo para acesso por dispositivo móvel.',
+                imageUrl: '../static/img/qrCode_infoVacinas.png',
+                imageWidth: 300,
+                imageHeight: 300,
+                imageAlt: 'Qr Code',
+})
+        }
+    </script>
 
 </body>
 

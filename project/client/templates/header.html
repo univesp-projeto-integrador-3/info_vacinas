@@ -39,6 +39,10 @@
                     <a title="Consultar UBS (por endereço)" class="nav-link" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="{{ url_for('main.consulta_ubs_por_endereco') }}"><span class="oi oi-map"></span>&nbsp;Consultar UBS</a>
                 </li>
 
+                <li class="nav-item">
+                    <a title="Acesse por outro dispositivo" class="nav-link" id="compartilhe" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'"><span class="oi oi-phone"></span>&nbsp;Qr Code</a>
+                </li>
+
                 {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
