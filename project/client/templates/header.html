@@ -28,22 +28,24 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="{{ url_for('main.idosos') }}">Idosos</a>
                 </li>
-            -->
+                -->
+
                 <li class="nav-item">
                     <a class="nav-link" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="{{ url_for('main.gestantes') }}">Gestantes</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="{{ url_for('main.consulta_ubs') }}">Consultar UBS (por CEP)</a>
+                    <a title="Consultar UBS (por endereço)" class="nav-link" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="{{ url_for('main.consulta_ubs_por_endereco') }}"><span class="oi oi-map"></span>&nbsp;Consultar UBS</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="{{ url_for('main.consulta_ubs') }}">Consultar UBS (por CEP)</a>
+                </li>
+                <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.consulta_ubs_mais_proxima') }}">Consultar UBS mais próxima (por CEP)</a>
                 </li>
-
-                <li class="nav-item">
-                    <a title="Consultar UBS (por endereço)" class="nav-link" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'" href="{{ url_for('main.consulta_ubs_por_endereco') }}"><span class="oi oi-map"></span>&nbsp;Consultar UBS</a>
-                </li>
+                -->
 
                 <li class="nav-item">
                     <a title="Acesse por outro dispositivo" class="nav-link" id="compartilhe" style="color:yellow;" onmouseover="this.style.color='orange'" onmouseout="this.style.color='yellow'"><span class="oi oi-phone"></span>&nbsp;Qr Code</a>
