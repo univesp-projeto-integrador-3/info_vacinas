@@ -28,6 +28,7 @@ def home():
 
 @main_blueprint.route("/consulta_ubs", methods=["GET", "POST"])
 def consulta_ubs():
+    subtitulo = 'Preencha o CEP desejado para consultar as unidades de saúde'
     form = ConsultaUbsForm(request.form)
 
     if form.validate_on_submit():
@@ -40,6 +41,12 @@ def consulta_ubs():
         headers = {
             'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
         response = requests.get(url, headers=headers)
+
+        # erro na API de CEP
+        if response.status_code != 200:
+            msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
+            flash(msg, "danger")
+            return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
 
         dados_cep = response.json()
 
@@ -101,7 +108,7 @@ def consulta_ubs():
             rows=rows,
         )
 
-    return render_template("main/consulta_ubs.html", form=form)
+    return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
 
 
 @main_blueprint.route("/sobre")
@@ -340,6 +347,7 @@ def ubs_lista():
 
 @main_blueprint.route("/consulta_ubs_mais_proxima", methods=["GET", "POST"])
 def consulta_ubs_mais_proxima():
+    subtitulo = 'Preencha o CEP desejado para consultar as unidades de saúde'
     form = ConsultaUbsForm(request.form)
 
     if form.validate_on_submit():
@@ -353,6 +361,13 @@ def consulta_ubs_mais_proxima():
             'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
         response = requests.get(url, headers=headers)
 
+        subtitulo = 'Preencha o CEP desejado para consultar as unidades de saúde próximas'
+
+        # erro na API de CEP
+        if response.status_code != 200:
+            msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
+            flash(msg, "danger")
+            return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
         dados_cep = response.json()
 
         # consulta ubs mais próximas
@@ -387,4 +402,4 @@ def consulta_ubs_mais_proxima():
             rows=rows
         )
 
-    return render_template("main/consulta_ubs.html", form=form)
+    return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
