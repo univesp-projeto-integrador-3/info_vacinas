@@ -42,20 +42,35 @@ def consulta_ubs():
             'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
         response = requests.get(url, headers=headers)
 
-        # erro na API de CEP
+        if response.status_code == 200:
+            dados_cep = response.json()
+            # consulta ubs da mesma cidade do cep pesquisado
+            municipio = unidecode.unidecode(
+                dados_cep.get('cidade').get('nome')).upper()
+            uf = dados_cep.get('estado').get('sigla').upper()
+            bairro = unidecode.unidecode(
+                dados_cep.get('bairro')).upper()
+
+        # erro na API de CEP, primeira tentativa
         if response.status_code != 200:
-            msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
-            flash(msg, "danger")
-            return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
+            url = f"http://viacep.com.br/ws/{cep}/json/"
+            response = requests.get(url, headers=headers)
+            print(response.json())
 
-        dados_cep = response.json()
+            if response.status_code == 200:
+                dados_cep = response.json()
+                # consulta ubs da mesma cidade do cep pesquisado
+                municipio = unidecode.unidecode(
+                    dados_cep.get('localidade')).upper()
+                uf = dados_cep.get('uf').upper()
+                bairro = unidecode.unidecode(
+                    dados_cep.get('bairro')).upper()
 
-        # consulta ubs da mesma cidade do cep pesquisado
-        municipio = unidecode.unidecode(
-            dados_cep.get('cidade').get('nome')).upper()
-        uf = dados_cep.get('estado').get('sigla').upper()
-        bairro = unidecode.unidecode(
-            dados_cep.get('bairro')).upper()
+            # erro na API de CEP
+            if response.status_code != 200:
+                msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
+                flash(msg, "danger")
+                return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
 
         sql = f'''
             SELECT
