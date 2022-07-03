@@ -31,21 +31,21 @@
 
     <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js">
-          $(document).ready(function() {
-             $('#lista_ubs').DataTable({
-                 "language": {
-                     "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
-                 },
-                     "order": [
-                         [2, 'asc']
-                     ],
+        $(document).ready(function() {
+            $('#lista_ubs').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+                },
+                "order": [
+                    [2, 'asc']
+                ],
                 "iDisplayLength": 20
-         
+
+            });
         });
-    });
     </script>
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -102,11 +102,12 @@
             {% endif %}
 
         </div>
-            {% include 'footer.html' %} {% block js %}{% endblock %}
+        {% include 'footer.html' %} {% block js %}{% endblock %}
     </div>
 
     <script>
-        document.getElementById("compartilhe").addEventListener("click",exibeQrCode);
+        document.getElementById("compartilhe").addEventListener("click", exibeQrCode);
+
         function exibeQrCode() {
             Swal.fire({
                 title: 'Compartilhe!',
@@ -115,7 +116,7 @@
                 imageWidth: 300,
                 imageHeight: 300,
                 imageAlt: 'Qr Code',
-})
+            })
         }
     </script>
 

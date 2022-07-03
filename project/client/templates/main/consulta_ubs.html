@@ -1,34 +1,27 @@
 {% extends '_base.html' %} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
 
-<div class="body-content">
-    <link href="{{url_for('static', filename='floating-labels.css')}}" rel="stylesheet" media="screen">
+<link href="{{url_for('static', filename='floating-labels.css')}}" rel="stylesheet" media="screen">
 
-    <section class="jumbotron text-center" style="margin-bottom: 0px; padding-bottom: 0px; padding-top:0px;">
-        <div class="container">
+<section class="jumbotron text-center" style="margin-bottom: 0px; padding-bottom: 0px; padding-top:0px;">
+    <div class="container">
 
-            <img class="mb-4" src="{{url_for('static', filename='img/icone_vacina_2.png')}}" width="330" height="85">
+        <img class="mb-4" src="{{url_for('static', filename='img/icone_vacina_2.png')}}" width="330" height="85">
 
-            <h2 class="jumbotron-heading">Consulta Unidades Básicas de Saúde</h2>
-            <p class="lead text-muted">
+        <h2 class="jumbotron-heading">Consulta Unidades Básicas de Saúde</h2>
+        <p class="lead text-muted">
+            {% if subtitulo is defined %} {{ subtitulo }} {% endif %}
+        </p>
+        <form class="form-signin" role="form" method="POST" action="{{ url_for('main.consulta_ubs') }}">
+            {{ form.csrf_token }} {{ form.hidden_tag() }} {{ wtf.form_errors(form, hiddens="only") }}
 
-                {% if subtitulo is defined %} {{ subtitulo }} {% endif %}
+            <div class="form-group">
+                {{ wtf.form_field(form.cep) }}
+            </div>
 
-                <form class="form-signin" role="form" method="POST" action="{{ url_for('main.consulta_ubs') }}">
-                    {{ form.csrf_token }} {{ form.hidden_tag() }} {{ wtf.form_errors(form, hiddens="only") }}
-            </p>
-            <p>
+            <p></p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Consultar</button>
 
-                <div class="form-group">
-                    {{ wtf.form_field(form.cep) }}
-                </div>
-
-                <p></p>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Consultar</button>
-
-                </form>
-            </p>
-        </div>
-    </section>
-
-</div>
+        </form>
+    </div>
+</section>
 {% endblock %}
