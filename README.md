@@ -3,16 +3,28 @@
 Projeto web para disponibilizar informações sobre vacinas.
 
 O projeto utiliza a linguagem de programação Python com o framework Flask
-e banco de dados Postgres.
+e banco de dados Postgres/SQL Server.
 
 A aplicação está disponível na internet, no endereço: https://info-vacinas.herokuapp.com/
 
 ## Clonar o projeto
 
 ```sh
-$ git clone https://github.com/univesp-projeto-integrador-1/info_vacinas.git
+$ git clone https://github.com/univesp-projeto-integrador-3/info_vacinas.git
 ```
 
+## Criar o virtualenv
+
+```sh
+$ virtualenv info-vacinas
+```
+
+
+## Ativar o virtualenv
+
+```sh
+$ .\info-vacinas\Scripts\activate
+```
 
 ## Instalar as dependências
 
@@ -20,17 +32,9 @@ $ git clone https://github.com/univesp-projeto-integrador-1/info_vacinas.git
 $ pip install -r requirements.txt
 ```
 
-# Setup
-
-Use this guide if you do NOT want to use Docker in your project.
-
-## Getting Started
-
-Create and activate a virtual environment, and then install the requirements.
-
 ### Set Environment Variables
 
-Update *project/server/config.py*, and then run:
+Ajuste o arquivo .env e o arquivo *project/server/config.py* com as configurações do projeto, e rode:
 
 ```sh
 $ export APP_NAME="info_vacinas"
@@ -88,3 +92,11 @@ or
 $ flake8 project
 ```
 
+## info_vacinas-app-android
+
+Está sendo desenvolvido um App Android para disponibilizar informações sobre as unidades de 
+saúde mais próximas do usuário, baseando-se na localização atual do usuário.
+
+O repositórido GitHub do APP está disponível em: https://github.com/univesp-projeto-integrador-3/info_vacinas_app
+
+A pasta ./out contém os arquivos de saída compilados.
