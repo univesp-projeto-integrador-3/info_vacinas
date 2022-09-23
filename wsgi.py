@@ -1,11 +1,7 @@
 # wsgy.py
-import subprocess
-import sys
-
 from flask.cli import FlaskGroup
 
-from project.server import create_app, db
-from project.server.models import User
+from project.server import create_app
 
 app = create_app()
 cli = FlaskGroup(create_app=create_app)
