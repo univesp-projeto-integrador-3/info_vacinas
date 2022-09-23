@@ -39,40 +39,6 @@ def new_user():
               'form-success')
     return render_template('admin/new_user.html', form=form)
 
-
-@admin_blueprint.route('/invite-user', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def invite_user():
-    """Invites a new user to create an account and set their own password."""
-    form = InviteUserForm()
-    if form.validate_on_submit():
-        user = User(
-            role=form.role.data,
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
-            email=form.email.data)
-        db.session.add(user)
-        db.session.commit()
-        token = user.generate_confirmation_token()
-        invite_link = url_for(
-            'account.join_from_invite',
-            user_id=user.id,
-            token=token,
-            _external=True)
-        get_queue().enqueue(
-            send_email,
-            recipient=user.email,
-            subject='You Are Invited To Join',
-            template='account/email/invite',
-            user=user,
-            invite_link=invite_link,
-        )
-        flash('User {} successfully invited'.format(user.full_name()),
-              'form-success')
-    return render_template('admin/new_user.html', form=form)
-
-
 @admin_blueprint.route('/users')
 @login_required
 @admin_required
