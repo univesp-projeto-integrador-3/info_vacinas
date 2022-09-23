@@ -1,5 +1,7 @@
 # info_vacinas
 
+[![.github/workflows/python-package-conda.yml](https://github.com/univesp-projeto-integrador-3/info_vacinas/actions/workflows/python-package-conda.yml/badge.svg?branch=main)](https://github.com/univesp-projeto-integrador-3/info_vacinas/actions/workflows/python-package-conda.yml)
+
 Projeto web para disponibilizar informações sobre vacinas.
 
 O projeto utiliza a linguagem de programação Python com o framework Flask
