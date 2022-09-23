@@ -3,9 +3,10 @@
 Projeto web para disponibilizar informações sobre vacinas.
 
 O projeto utiliza a linguagem de programação Python com o framework Flask
-e banco de dados Postgres/SQL Server.
+e banco de dados Postgres e SQL Server.
 
-A aplicação está disponível na internet, no endereço: https://info-vacinas.herokuapp.com/
+A aplicação está disponível na internet, no endereço: 
+https://info-vacinas.herokuapp.com/
 
 ## Clonar o projeto
 
@@ -22,8 +23,16 @@ $ virtualenv info-vacinas
 
 ## Ativar o virtualenv
 
+### No Windows
 ```sh
 $ .\info-vacinas\Scripts\activate
+```
+
+ou 
+
+### No Linux
+```sh
+$ source ./info-vacinas/bin/activate
 ```
 
 ## Instalar as dependências
@@ -34,7 +43,8 @@ $ pip install -r requirements.txt
 
 ### Set Environment Variables
 
-Ajuste o arquivo .env e o arquivo *project/server/config.py* com as configurações do projeto, e rode:
+Ajuste o arquivo .env e o arquivo *project/server/config.py* com as 
+configurações do projeto, e rode:
 
 ```sh
 $ export APP_NAME="info_vacinas"
@@ -42,7 +52,9 @@ $ export APP_SETTINGS=project.server.config.ProductionConfig
 $ export FLASK_DEBUG=0
 ```
 
-By default the app is set to use the production configuration. If you would like to use the development configuration, you can alter the `APP_SETTINGS` environment variable:
+By default the app is set to use the production configuration. If you would 
+like to use the development configuration, you can alter the `APP_SETTINGS` 
+environment variable:
 
 ```sh
 $ export APP_SETTINGS=project.server.config.DevelopmentConfig
@@ -94,9 +106,11 @@ $ flake8 project
 
 ## info_vacinas-app-android
 
-Está sendo desenvolvido um App Android para disponibilizar informações sobre as unidades de 
-saúde mais próximas do usuário, baseando-se na localização atual do usuário.
+Está sendo desenvolvido um App Android para disponibilizar informações sobre 
+as unidades de saúde mais próximas do usuário, baseando-se na localização atual 
+do usuário.
 
-O repositórido GitHub do APP está disponível em: https://github.com/univesp-projeto-integrador-3/info_vacinas_app
+O repositórido GitHub do APP está disponível em:
+https://github.com/univesp-projeto-integrador-3/info_vacinas_app
 
 A pasta ./out contém os arquivos de saída compilados.
