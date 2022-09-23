@@ -3,9 +3,10 @@ from project.server import db
 from project.server.models import Role, User
 from wtforms import ValidationError
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from wtforms.fields import PasswordField, StringField, SubmitField
+from wtforms.fields import SubmitField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import Email, EqualTo, InputRequired, Length
+from wtforms import PasswordField, StringField
 
 
 class ChangeUserEmailForm(FlaskForm):

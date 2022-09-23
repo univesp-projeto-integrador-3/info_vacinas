@@ -1,8 +1,8 @@
 # project/server/main/forms.py
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SelectField, StringField
+from wtforms import SelectField, StringField
 from wtforms.fields import DateField
-from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
+from wtforms.validators import DataRequired, Regexp
 
 
 class ConsultaCalendarioForm(FlaskForm):

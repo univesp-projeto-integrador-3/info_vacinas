@@ -1,8 +1,6 @@
 # project/server/main/views.py
 import os
 from datetime import datetime
-from gettext import lngettext
-from os import DirEntry
 
 import requests
 import unidecode
@@ -13,7 +11,6 @@ from flask import (Blueprint, Markup, flash, jsonify, redirect,
 from project.server import db
 from project.server.main.forms import ConsultaCalendarioForm, ConsultaUbsForm
 from project.server.models import Template
-from sqlalchemy import lateral
 
 load_dotenv()  # take environment variables from .env.
 
@@ -68,9 +65,13 @@ def consulta_ubs():
 
             # erro na API de CEP
             if response.status_code != 200:
-                msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
+                msg = '''
+                Erro na consulta da API de CEP, tente novamente mais tarde.
+                '''
                 flash(msg, "danger")
-                return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
+                return render_template(
+                  "main/consulta_ubs.html", form=form, subtitulo=subtitulo
+                )
 
         sql = f'''
             SELECT
@@ -82,7 +83,7 @@ def consulta_ubs():
                 BAIRRO
             FROM
                 univesp.dbo.unidades_vacinacao
-            WHERE 
+            WHERE
                 UF = '{uf}' AND
                 MUNICIPIO = '{municipio}' AND
                 BAIRRO	= '{bairro}'
@@ -101,7 +102,7 @@ def consulta_ubs():
                     BAIRRO
                 FROM
                     univesp.dbo.unidades_vacinacao
-                WHERE 
+                WHERE
                     UF = '{uf}' AND
                     MUNICIPIO = '{municipio}'
             '''
@@ -110,8 +111,8 @@ def consulta_ubs():
 
         try:
             rows = db.engine.execute(sql)
-        except:
-            print('Erro executando sql', sql)
+        except Exception as e:
+            print('Erro executando sql', sql, e)
 
         return render_template(
             'main/resultado_consulta_ubs_por_municipio_bairro.html',
@@ -123,7 +124,9 @@ def consulta_ubs():
             rows=rows,
         )
 
-    return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
+    return render_template(
+      "main/consulta_ubs.html", form=form, subtitulo=subtitulo
+    )
 
 
 @main_blueprint.route("/sobre")
@@ -169,7 +172,8 @@ def consulta_calendario():
         # mensagem de alerta para as gestantes
         if is_gestante == '1':
             mensagem = '''
-            Atenção!  De acordo com o Ministério da Saúde, há vacinas que gestantes não podem tomar. Verifique com seu médico.
+            Atenção!  De acordo com o Ministério da Saúde, há vacinas que
+            gestantes não podem tomar. Verifique com seu médico.
             '''
             mensagem = Markup(mensagem)
             flash(mensagem, "danger")
@@ -181,12 +185,15 @@ def consulta_calendario():
         if anos > 4 and anos < 9:
             # criança sem vacina - +4 e <9
             mensagem = '''
-            Para essa faixa etária não há vacinas disponibilizadas obrigatórias de acordo com o ministério da Saúde.
+            Para essa faixa etária não há vacinas disponibilizadas obrigatórias
+            de acordo com o ministério da Saúde.
             </br>
             Dicas:
             </br>
-            - Consulte o posto de vacinação mais próximo para verificar se há campanhas locais de imunização.</br>
-            - Veja o calendário anterior se há alguma vacina faltante para imunização completa no quadro abaixo.
+            - Consulte o posto de vacinação mais próximo para verificar se há
+            campanhas locais de imunização.</br>
+            - Veja o calendário anterior se há alguma vacina faltante para
+            imunização completa no quadro abaixo.
             '''
             mensagem = Markup(mensagem)
             flash(mensagem, "warning")
@@ -222,7 +229,7 @@ def consulta_ubs_por_endereco():
 # criar uma "API" que retorna as UFs onde existem unidades de saúde
 @main_blueprint.route("/ubs_uf", methods=["GET"])
 def ubs_ufs():
-    sql = f'''
+    sql = '''
         SELECT
             DISTINCT UF
         FROM
@@ -236,8 +243,8 @@ def ubs_ufs():
 
     try:
         rows = db.engine.execute(sql)
-    except:
-        print('Erro executando sql', sql)
+    except Exception as e:
+        print('Erro executando sql', sql, e)
 
     response = jsonify({'result': [dict(row) for row in rows]})
     response.headers.add("Access-Control-Allow-Origin", "*")
@@ -254,9 +261,9 @@ def ubs_cidades():
             MUNICIPIO
         FROM
             univesp.dbo.unidades_vacinacao
-        WHERE 
+        WHERE
             UF = '{uf}'
-        ORDER BY 
+        ORDER BY
             MUNICIPIO
     '''
 
@@ -264,8 +271,8 @@ def ubs_cidades():
 
     try:
         rows = db.engine.execute(sql)
-    except:
-        print('Erro executando sql', sql)
+    except Exception as e:
+        print('Erro executando sql', sql, e)
 
     response = jsonify({'result': [dict(row) for row in rows]})
     response.headers.add("Access-Control-Allow-Origin", "*")
@@ -284,10 +291,10 @@ def ubs_bairros():
             BAIRRO
         FROM
             univesp.dbo.unidades_vacinacao
-        WHERE 
-            UF = '{uf}' AND 
+        WHERE
+            UF = '{uf}' AND
             MUNICIPIO = '{municipio}'
-        ORDER BY 
+        ORDER BY
             BAIRRO
     '''
 
@@ -295,8 +302,8 @@ def ubs_bairros():
 
     try:
         rows = db.engine.execute(sql)
-    except:
-        print('Erro executando sql', sql)
+    except Exception as e:
+        print('Erro executando sql', sql, e)
 
     response = jsonify({'result': [dict(row) for row in rows]})
     response.headers.add("Access-Control-Allow-Origin", "*")
@@ -322,7 +329,7 @@ def ubs_lista():
             BAIRRO
         FROM
             univesp.dbo.unidades_vacinacao
-        WHERE 
+        WHERE
             UF = '{uf}' AND
             MUNICIPIO = '{municipio}' AND
             BAIRRO	= '{bairro}'
@@ -339,7 +346,7 @@ def ubs_lista():
                 BAIRRO
             FROM
                 univesp.dbo.unidades_vacinacao
-            WHERE 
+            WHERE
                 UF = '{uf}' AND
                 MUNICIPIO = '{municipio}'
         '''
@@ -348,8 +355,8 @@ def ubs_lista():
 
     try:
         rows = db.engine.execute(sql)
-    except:
-        print('Erro executando sql', sql)
+    except Exception as e:
+        print('Erro executando sql', sql, e)
 
     return render_template(
         'main/resultado_consulta_ubs_por_municipio_bairro.html',
@@ -376,13 +383,17 @@ def consulta_ubs_mais_proxima():
             'Authorization': 'Token token='+os.environ.get("API_CEP_TOKEN")}
         response = requests.get(url, headers=headers)
 
-        subtitulo = 'Preencha o CEP desejado para consultar as unidades de saúde próximas'
+        subtitulo = '''
+        Preencha o CEP desejado para consultar as unidades de saúde próximas
+        '''
 
         # erro na API de CEP
         if response.status_code != 200:
             msg = 'Erro na consulta da API de CEP, tente novamente mais tarde.'
             flash(msg, "danger")
-            return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
+            return render_template(
+              "main/consulta_ubs.html", form=form, subtitulo=subtitulo
+            )
         dados_cep = response.json()
 
         # consulta ubs mais próximas
@@ -392,12 +403,14 @@ def consulta_ubs_mais_proxima():
         sql = f'''
         SELECT DISTINCT TOP 10
             *,
-            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) as Distance
+            sqrt(square(abs(Latitude-({lat}))) +
+            square(abs(Longitude-({lng})))) as Distance
         FROM
             [dbo].[cadastro_estabelecimentos_cnes]
         WHERE
             IBGE = LEFT({ibge}, 6) AND
-            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng})))) < 5
+            sqrt(square(abs(Latitude-({lat}))) +
+            square(abs(Longitude-({lng})))) < 5
         ORDER BY
             Distance
         ASC
@@ -407,8 +420,8 @@ def consulta_ubs_mais_proxima():
 
         try:
             rows = db.engine.execute(sql)
-        except:
-            print('Erro executando sql', sql)
+        except Exception as e:
+            print('Erro executando sql', sql, e)
 
         return render_template(
             'main/resultado_consulta_ubs.html',
@@ -417,4 +430,6 @@ def consulta_ubs_mais_proxima():
             rows=rows
         )
 
-    return render_template("main/consulta_ubs.html", form=form, subtitulo=subtitulo)
+    return render_template(
+      "main/consulta_ubs.html", form=form, subtitulo=subtitulo
+    )

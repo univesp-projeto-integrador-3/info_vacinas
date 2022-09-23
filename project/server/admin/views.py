@@ -1,10 +1,9 @@
 from flask import (Blueprint, abort, flash, redirect, render_template, request,
                    url_for)
 from flask_login import current_user, login_required
-from flask_rq import get_queue
 from project.server import db
 from project.server.admin.forms import (ChangeAccountTypeForm,
-                                        ChangeUserEmailForm, InviteUserForm,
+                                        ChangeUserEmailForm,
                                         NewUserForm)
 from project.server.decorators import admin_required
 from project.server.models import EditableHTML, Role, User
@@ -39,6 +38,7 @@ def new_user():
               'form-success')
     return render_template('admin/new_user.html', form=form)
 
+
 @admin_blueprint.route('/users')
 @login_required
 @admin_required
@@ -62,7 +62,10 @@ def user_info(user_id):
     return render_template('admin/manage_user.html', user=user)
 
 
-@admin_blueprint.route('/user/<int:user_id>/change-email', methods=['GET', 'POST'])
+@admin_blueprint.route(
+  '/user/<int:user_id>/change-email',
+  methods=['GET', 'POST']
+)
 @login_required
 @admin_required
 def change_user_email(user_id):

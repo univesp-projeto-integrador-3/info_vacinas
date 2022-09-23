@@ -80,7 +80,14 @@ class Vacina(db.Model):
         db.Boolean, nullable=False, default=False)
     is_disp_crie = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __init__(self, nome, descricao, is_disp_rede_publica, is_disp_clinica_privada, is_disp_crie):
+    def __init__(
+      self,
+      nome,
+      descricao,
+      is_disp_rede_publica,
+      is_disp_clinica_privada,
+      is_disp_crie
+      ):
         self.nome = nome
         self.descricao = descricao
         self.is_disp_rede_publica = is_disp_rede_publica
@@ -132,8 +139,11 @@ class PeriodoIdade(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     descricao = db.Column(db.String(255), unique=True, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
-    categoria_idade = db.Column(db.Integer, db.ForeignKey('categoria_idade.id'),
-                                nullable=False)
+    categoria_idade = db.Column(
+      db.Integer,
+      db.ForeignKey('categoria_idade.id'),
+      nullable=False
+    )
 
     def __init__(self, descricao):
         self.descricao = descricao
