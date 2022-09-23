@@ -11,6 +11,10 @@ env:
   URL: "https://info-vacinas.herokuapp.com/"
   SECRET_KEY: "my_secret"
   URL_VIA_CEP: "http://viacep.com.br/ws/{cep}/json/"
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  DATABASE_URL_POSTGRES: ${{ secrets.DATABASE_URL_POSTGRES }}
+  DATABASE_URL_SQL_SERVER: ${{ secrets.DATABASE_URL_SQL_SERVER }}
+  API_CEP_TOKEN: ${{ secrets.API_CEP_TOKEN }}
 
 jobs:
   build-linux:
