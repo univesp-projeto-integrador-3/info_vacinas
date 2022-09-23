@@ -2,6 +2,16 @@ name: Python Package using Conda
 
 on: [push]
 
+env:
+  DAY_OF_WEEK: Monday
+  APP_NAME: "info_vacinas"
+  APP_SETTINGS: "project.server.config.DevelopmentConfig"
+  FLASK_DEBUG: 1
+  API_CEP_URL: "https://www.cepaberto.com/api/v3/cep?cep:"
+  URL: "https://info-vacinas.herokuapp.com/"
+  SECRET_KEY: "my_secret"
+  URL_VIA_CEP: "http://viacep.com.br/ws/{cep}/json/"
+
 jobs:
   build-linux:
     runs-on: ubuntu-latest
