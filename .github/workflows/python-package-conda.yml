@@ -24,17 +24,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Set up Python 3.8
       uses: actions/setup-python@v3
       with:
         python-version: 3.8
+    
     - name: Add conda to system path
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         echo $CONDA/bin >> $GITHUB_PATH
+    
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+    
     - name: Lint with flake8
       run: |
         conda install flake8
@@ -43,8 +47,16 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
         python manage.py flake
+    
     - name: Test with pytest
       run: |
         conda install pytest
         python manage.py test
         python manage.py cov
+    
+    - name: Deploy to Heroku
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "info-vacinas"
+        heroku_email: "royopa@gmail.com"
