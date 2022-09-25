@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 A base de postos de de saúde do Brasil inteiro foi dividida em vários arquivos por UFs, para facilitar o processo de enriquecimento da base, para incluir as informações de localização da UBS.
 
 - AC
@@ -37,7 +27,7 @@ A base de postos de de saúde do Brasil inteiro foi dividida em vários arquivos
 - DF
 
   - postos_saude_brasil_DF.csv
-    175
+    175 de 175 registros mapeados.
 - ES
 
   - postos_saude_brasil_ES.csv
@@ -117,6 +107,7 @@ A base de postos de de saúde do Brasil inteiro foi dividida em vários arquivos
 - TO
 
   postos_saude_brasil_TO.csv
+
   433
 
   O programa usado para incluir a informação de localização das unidades de saúde é o [processa_arquivo_por_uf.py], que pode receber como parâmetro a sigla da UF que se deseja processar.
