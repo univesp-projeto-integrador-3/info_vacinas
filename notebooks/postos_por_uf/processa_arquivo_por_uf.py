@@ -14,7 +14,7 @@ print("The arguments are: ", str(sys.argv))
 
 ufs = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG',
        'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR',
-       'RS']
+       'RS', 'SC', 'SE', 'SP', 'TO']
 
 if len(sys.argv) > 1:
     ufs = [sys.argv[1].upper()]
@@ -35,19 +35,10 @@ def get_location(row_df):
         print(' Nominatim')
         location = geolocator_nominatim.geocode(row_df['ENDERECO_COMPLETO'])
         if not location:
-            raise Exception('Sem retorno')
+            return None, None, None, None
     except Exception as e:
         print(f' Erro: {e}')
         return None, None, None, None
-        # se a localização não retorna nada, tenta usar o TomTom
-        try:
-            print(' Here')
-            location = geolocator_here.geocode(row_df['ENDERECO_COMPLETO'])
-            if not location:
-                raise Exception('Sem retorno')
-        except Exception as e:
-            print(f' Erro: {e}')
-            return None, None, None, None
 
     if not location:
         return None, None, None, None

@@ -32,7 +32,7 @@ def get_location(row_df):
     print(' ', row_df['ENDERECO_COMPLETO'])
     try:
         # tenta fazer a localização usando o Nominatim
-        print(' Nominatim')
+        print(' Here')
         location = geolocator_here.geocode(row_df['ENDERECO_COMPLETO'])
         if not location:
             raise Exception('Sem retorno')
