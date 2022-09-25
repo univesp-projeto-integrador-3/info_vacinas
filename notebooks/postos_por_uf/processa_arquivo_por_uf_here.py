@@ -33,21 +33,12 @@ def get_location(row_df):
     try:
         # tenta fazer a localização usando o Nominatim
         print(' Nominatim')
-        location = geolocator_nominatim.geocode(row_df['ENDERECO_COMPLETO'])
+        location = geolocator_here.geocode(row_df['ENDERECO_COMPLETO'])
         if not location:
             raise Exception('Sem retorno')
     except Exception as e:
         print(f' Erro: {e}')
         return None, None, None, None
-        # se a localização não retorna nada, tenta usar o TomTom
-        try:
-            print(' Here')
-            location = geolocator_here.geocode(row_df['ENDERECO_COMPLETO'])
-            if not location:
-                raise Exception('Sem retorno')
-        except Exception as e:
-            print(f' Erro: {e}')
-            return None, None, None, None
 
     if not location:
         return None, None, None, None
