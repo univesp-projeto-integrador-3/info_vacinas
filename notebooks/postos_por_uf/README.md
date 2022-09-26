@@ -3,11 +3,11 @@ A base de postos de de saúde do Brasil inteiro foi dividida em vários arquivos
 - AC
 
   - postos_saude_brasil_AC.csv
-    243
+    242 de 243 registros mapeados.
 - AL
 
   - postos_saude_brasil_AL.csv
-    1060
+    1060 de 1060 registros mapeados.
 - AM
 
   - postos_saude_brasil_AM.csv

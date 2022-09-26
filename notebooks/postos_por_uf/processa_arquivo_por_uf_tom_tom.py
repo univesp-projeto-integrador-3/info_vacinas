@@ -24,7 +24,7 @@ print(ufs)
 
 def get_location(row_df):
     # Geolocators
-    geolocator = TomTom(api_key='wvuAFmBut64DLjQqey19XtfuMXZilzbj', user_agent="None")
+    geolocator = TomTom(api_key='wvuAFmBut64DLjQqey19XtfuMXZilzbj', user_agent="info_vacinas")
     geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)
 
     # pula os registros que já possuem dados de localização
