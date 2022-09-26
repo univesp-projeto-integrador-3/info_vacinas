@@ -22,26 +22,47 @@ if len(sys.argv) > 1:
 print(ufs)
 
 
-def get_location(row_df):
-    # Geolocators
-    geolocator = TomTom(api_key='wvuAFmBut64DLjQqey19XtfuMXZilzbj', user_agent="info_vacinas")
-    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)
+def get_location_tomtom(api_key_env, endereco_completo):
+    api_key = os.environ.get(api_key_env)
+    geolocator = TomTom(api_key=api_key, user_agent="info_vacinas")
+    location = geolocator.geocode(endereco_completo)
+    if not location:
+        return None
+    return location
 
+
+def get_location(row_df):
     # pula os registros que já possuem dados de localização
     if type(row_df['address']) is str:
         return row_df['latitude'], row_df['longitude'], row_df['address'], row_df['point']
 
     # inicializa a variável que receberá o retorno das APIs de localização
     location = None
-    print(' ', row_df['ENDERECO_COMPLETO'])
+    endereco_completo = row_df['ENDERECO_COMPLETO']
+    print(' ', endereco_completo)
     try:
-        # tenta fazer a localização usando o Nominatim
-        location = geolocator.geocode(row_df['ENDERECO_COMPLETO'])
-        if not location:
-            print(None)
-            return None, None, None, None
+        location = get_location_tomtom('TOMTOM_API_KEY', endereco_completo)
     except Exception as e:
-        print(f' Erro: {e}')
+        try:
+            location = get_location_tomtom(
+              'TOMTOM_API_KEY_2', endereco_completo)
+        except Exception as e:
+            try:
+                location = get_location_tomtom(
+                  'TOMTOM_API_KEY_3', endereco_completo)
+            except Exception as e:
+                try:
+                    location = get_location_tomtom(
+                      'TOMTOM_API_KEY_4', endereco_completo)
+                except Exception as e:
+                    try:
+                        location = get_location_tomtom(
+                          'TOMTOM_API_KEY_5', endereco_completo)
+                    except Exception as e:                  
+                        print(f' Erro: {e}')
+                        location = None
+
+    if not location:
         print(None)
         return None, None, None, None
 
