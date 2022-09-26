@@ -17,8 +17,8 @@ ufs = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG',
 
 # lista para remover registros que já passaram por todas UBs
 ufs = ['CE', 'GO', 'MA', 'MG',
-       'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN',
-       'RS', 'SC', 'SE']
+       'PA', 'PE', 'PI', 'PR', 'RJ',
+       'RS', 'SC']
 
 if len(sys.argv) > 1:
     ufs = [sys.argv[1].upper()]
@@ -48,11 +48,11 @@ def get_location(row_df):
     endereco_completo = row_df['ENDERECO_COMPLETO']
     print(' ', endereco_completo)
     try:
-        location = get_location_tomtom('TOMTOM_API_KEY_01', endereco_completo)
+        location = get_location_tomtom('TOMTOM_API_KEY_11', endereco_completo)
     except Exception as e:
         try:
             location = get_location_tomtom(
-              'TOMTOM_API_KEY_02', endereco_completo)
+              'TOMTOM_API_KEY_12', endereco_completo)
         except Exception as e:
             try:
                 location = get_location_tomtom(
