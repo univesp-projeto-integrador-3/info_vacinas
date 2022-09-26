@@ -3,8 +3,7 @@ import sys
 
 import pandas as pd
 from dotenv import load_dotenv
-from geopy.extra.rate_limiter import RateLimiter
-from geopy.geocoders import HereV7, Nominatim, TomTom
+from geopy.geocoders import TomTom
 
 load_dotenv()  # take environment variables from .env.
 
@@ -17,9 +16,9 @@ ufs = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG',
        'RS', 'SC', 'SE', 'SP', 'TO']
 
 # lista para remover registros que já passaram por todas UBs
-ufs = ['BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG',
+ufs = ['CE', 'GO', 'MA', 'MG',
        'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN',
-       'RS', 'SC', 'SE', 'SP']
+       'RS', 'SC', 'SE']
 
 if len(sys.argv) > 1:
     ufs = [sys.argv[1].upper()]
@@ -30,9 +29,12 @@ print(ufs)
 def get_location_tomtom(api_key_env, endereco_completo):
     api_key = os.environ.get(api_key_env)
     geolocator = TomTom(api_key=api_key, user_agent="info_vacinas")
-    location = geolocator.geocode(endereco_completo)
+    try:
+        location = geolocator.geocode(endereco_completo)
+    except Exception as e:
+        raise Exception("Nenhum retorno na API TomTom", api_key_env)
     if not location:
-        return None
+        raise Exception("Nenhum retorno na API TomTom", api_key_env)
     return location
 
 
@@ -46,26 +48,48 @@ def get_location(row_df):
     endereco_completo = row_df['ENDERECO_COMPLETO']
     print(' ', endereco_completo)
     try:
-        location = get_location_tomtom('TOMTOM_API_KEY', endereco_completo)
+        location = get_location_tomtom('TOMTOM_API_KEY_01', endereco_completo)
     except Exception as e:
         try:
             location = get_location_tomtom(
-              'TOMTOM_API_KEY_2', endereco_completo)
+              'TOMTOM_API_KEY_02', endereco_completo)
         except Exception as e:
             try:
                 location = get_location_tomtom(
-                  'TOMTOM_API_KEY_3', endereco_completo)
+                  'TOMTOM_API_KEY_03', endereco_completo)
             except Exception as e:
                 try:
                     location = get_location_tomtom(
-                      'TOMTOM_API_KEY_4', endereco_completo)
+                      'TOMTOM_API_KEY_04', endereco_completo)
                 except Exception as e:
                     try:
                         location = get_location_tomtom(
-                          'TOMTOM_API_KEY_5', endereco_completo)
-                    except Exception as e:                  
-                        print(f' Erro: {e}')
-                        location = None
+                          'TOMTOM_API_KEY_05', endereco_completo)
+                    except Exception as e:
+                        try:
+                            location = get_location_tomtom(
+                              'TOMTOM_API_KEY_06', endereco_completo)
+                        except Exception as e:
+                            try:
+                                location = get_location_tomtom(
+                                  'TOMTOM_API_KEY_07', endereco_completo)
+                            except Exception as e:
+                                try:
+                                    location = get_location_tomtom(
+                                      'TOMTOM_API_KEY_08', endereco_completo)
+                                except Exception as e:
+                                    try:
+                                        location = get_location_tomtom(
+                                          'TOMTOM_API_KEY_09',
+                                          endereco_completo)
+                                    except Exception as e:
+                                        try:
+                                            location = get_location_tomtom(
+                                              'TOMTOM_API_KEY_10',
+                                              endereco_completo)
+                                        except Exception as e:
+                                            print(f' Erro: {e}')
+                                            location = None
 
     if not location:
         print(None)
