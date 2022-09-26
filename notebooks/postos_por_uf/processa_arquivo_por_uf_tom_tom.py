@@ -16,6 +16,11 @@ ufs = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG',
        'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR',
        'RS', 'SC', 'SE', 'SP', 'TO']
 
+# lista para remover registros que já passaram por todas UBs
+ufs = ['BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG',
+       'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN',
+       'RS', 'SC', 'SE', 'SP']
+
 if len(sys.argv) > 1:
     ufs = [sys.argv[1].upper()]
 
