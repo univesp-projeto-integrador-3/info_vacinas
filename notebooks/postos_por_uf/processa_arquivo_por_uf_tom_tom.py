@@ -48,44 +48,44 @@ def get_location(row_df):
     endereco_completo = row_df['ENDERECO_COMPLETO']
     print(' ', endereco_completo)
     try:
-        location = get_location_tomtom('TOMTOM_API_KEY_11', endereco_completo)
+        location = get_location_tomtom('TOMTOM_API_KEY_20', endereco_completo)
     except Exception as e:
         try:
             location = get_location_tomtom(
-              'TOMTOM_API_KEY_12', endereco_completo)
+              'TOMTOM_API_KEY_19', endereco_completo)
         except Exception as e:
             try:
                 location = get_location_tomtom(
-                  'TOMTOM_API_KEY_03', endereco_completo)
+                  'TOMTOM_API_KEY_18', endereco_completo)
             except Exception as e:
                 try:
                     location = get_location_tomtom(
-                      'TOMTOM_API_KEY_04', endereco_completo)
+                      'TOMTOM_API_KEY_17', endereco_completo)
                 except Exception as e:
                     try:
                         location = get_location_tomtom(
-                          'TOMTOM_API_KEY_05', endereco_completo)
+                          'TOMTOM_API_KEY_16', endereco_completo)
                     except Exception as e:
                         try:
                             location = get_location_tomtom(
-                              'TOMTOM_API_KEY_06', endereco_completo)
+                              'TOMTOM_API_KEY_15', endereco_completo)
                         except Exception as e:
                             try:
                                 location = get_location_tomtom(
-                                  'TOMTOM_API_KEY_07', endereco_completo)
+                                  'TOMTOM_API_KEY_14', endereco_completo)
                             except Exception as e:
                                 try:
                                     location = get_location_tomtom(
-                                      'TOMTOM_API_KEY_08', endereco_completo)
+                                      'TOMTOM_API_KEY_13', endereco_completo)
                                 except Exception as e:
                                     try:
                                         location = get_location_tomtom(
-                                          'TOMTOM_API_KEY_09',
+                                          'TOMTOM_API_KEY_12',
                                           endereco_completo)
                                     except Exception as e:
                                         try:
                                             location = get_location_tomtom(
-                                              'TOMTOM_API_KEY_10',
+                                              'TOMTOM_API_KEY_11',
                                               endereco_completo)
                                         except Exception as e:
                                             print(f' Erro: {e}')
