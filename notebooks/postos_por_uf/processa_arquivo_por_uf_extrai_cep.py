@@ -28,6 +28,7 @@ for uf in ufs:
     tamanho = len(df)
     print(f'Processando {str(tamanho).zfill(5)} registros')
 
+    df['address'] = df['address'].astype(str)
     df['cep'] = df['address'].str.extract(r'(\d{5}\-?\d{0,4})')
 
     df.to_csv(file_path, index=False)
