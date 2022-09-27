@@ -16,7 +16,7 @@ ufs = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG',
        'RS', 'SC', 'SE', 'SP', 'TO']
 
 # lista para remover registros que já passaram por todas UBs
-ufs = ['CE', 'MA', 'MG',
+ufs = ['MA', 'MG',
        'PA', 'PE', 'PI']
 
 if len(sys.argv) > 1:
