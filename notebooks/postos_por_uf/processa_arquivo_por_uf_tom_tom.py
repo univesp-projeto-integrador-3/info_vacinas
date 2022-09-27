@@ -2,6 +2,7 @@ import os
 import sys
 
 import pandas as pd
+import numpy as np
 from dotenv import load_dotenv
 from geopy.geocoders import TomTom
 
@@ -94,6 +95,8 @@ def get_location(row_df):
     return location.latitude, location.longitude, location.address, location.point
 
 
+# Cria uma lista com todos os itens não localizados
+lista_df_nao_localizados = []
 for uf in ufs:
     file_path = os.path.join(f'postos_saude_brasil_{uf}.csv')
     df = pd.read_csv(file_path)
@@ -104,4 +107,12 @@ for uf in ufs:
       *df.apply(get_location, axis=1))
 
     df.to_csv(file_path, index=False)
+
+    mask = df['latitude'].isna()
+    df_nao_localizados = df[mask]
+    lista_df_nao_localizados.append(df_nao_localizados)
+
     print('Arquivo de saída atualizado com sucesso.', file_path)
+
+df_nao_localizados = pd.concat(lista_df_nao_localizados)
+df_nao_localizados.to_csv('nao_localizados.csv', index=False)

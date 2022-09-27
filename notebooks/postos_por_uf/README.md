@@ -121,3 +121,10 @@ A base de postos de de saúde do Brasil inteiro foi dividida em vários arquivos
   O programa usado para incluir a informação de localização das unidades de saúde é o [processa_arquivo_por_uf.py], que pode receber como parâmetro a sigla da UF que se deseja processar.
 
   Ao final do processo, o arquivo CSV correspondente ao estado desejado será atualizado com as novas informações capturadas. Caso a unidade de saúde já contenha as informações de localização no CSV, o registro é ignorado para capturar informações novamente.
+
+
+
+Após o processamento completo do programa processa_arquivo_por_uf.py, uma lista com os itens faltando está disponível no arquivo nao_localizados.csv.
+
+Foi passado o programa processa_arquivo_por_uf_extrai_cep.py que extrai o CEP dos endereços.
+
