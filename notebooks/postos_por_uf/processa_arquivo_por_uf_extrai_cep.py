@@ -2,9 +2,7 @@ import os
 import sys
 
 import pandas as pd
-import numpy as np
 from dotenv import load_dotenv
-from geopy.geocoders import TomTom
 
 load_dotenv()  # take environment variables from .env.
 
