@@ -62,6 +62,10 @@ for uf in ufs:
 
     tamanho = len(df)
     print(f'Processando {str(tamanho).zfill(5)} registros')
+
+    print(df.head())
+    break
+
     df['latitude'], df['longitude'], df['address'], df['point'] = zip(
       *df.apply(get_location, axis=1))
 

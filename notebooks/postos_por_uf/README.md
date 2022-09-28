@@ -118,13 +118,43 @@ A base de postos de de saúde do Brasil inteiro foi dividida em vários arquivos
 
   433
 
-  O programa usado para incluir a informação de localização das unidades de saúde é o [processa_arquivo_por_uf.py], que pode receber como parâmetro a sigla da UF que se deseja processar.
+  O programa usado para incluir a informação de localização das unidades de 
+  saúde é o [processa_arquivo_por_uf.py], que pode receber como parâmetro a 
+  sigla da UF que se deseja processar.
 
-  Ao final do processo, o arquivo CSV correspondente ao estado desejado será atualizado com as novas informações capturadas. Caso a unidade de saúde já contenha as informações de localização no CSV, o registro é ignorado para capturar informações novamente.
+  Ao final do processo, o arquivo CSV correspondente ao estado desejado será 
+  atualizado com as novas informações capturadas. Caso a unidade de saúde já 
+  contenha as informações de localização no CSV, o registro é ignorado para 
+  capturar informações novamente.
 
 
 
-Após o processamento completo do programa processa_arquivo_por_uf.py, uma lista com os itens faltando está disponível no arquivo nao_localizados.csv.
+Após o processamento completo do programa processa_arquivo_por_uf.py, 
+uma lista com os itens faltando está disponível no arquivo nao_localizados.csv.
 
-Foi passado o programa processa_arquivo_por_uf_extrai_cep.py que extrai o CEP dos endereços.
+Foi passado o programa processa_arquivo_por_uf_extrai_cep.py que extrai o CEP 
+dos endereços, e inclui na coluna cep.
+
+
+
+
+## Cadastro Nacional de Estabelecimentos de Saúde
+https://cnes.datasus.gov.br/
+
+## Base de dados CENES
+http://cnes.datasus.gov.br/pages/downloads/arquivosBaseDados.jsp
+
+## Geonames - The GeoNames geographical database covers all countries 
+and contains over eleven million placenames that are available for download 
+free of charge.
+https://www.geonames.org/
+
+# tratamento de não localizados
+
+ - Cruzar as bases de dados não encontrados (nao_localizados.csv), fazendo a 
+ligação com a base de dados de estabelecimentos CNES (cenes_estabelecimentos_202208.csv),
+usando como chave o nome fantasia (NO_FANTASIA)
+
+ - A partir desse resultado, fazer o cruzamento com a base Geonames, que possui
+ o CPF e dados de endereço 
 
