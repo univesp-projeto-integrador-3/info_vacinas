@@ -25,8 +25,6 @@ class DevelopmentConfig(BaseConfig):
 
     DEBUG_TB_ENABLED = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
-    os.environ["DATABASE_URL"] = os.environ.get(
-        "DATABASE_URL").replace('postgres:', 'postgresql:')
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "DATABASE_URL_SQL_SERVER",
         "sqlite:///{0}".format(os.path.join(basedir, "dev.db"))
@@ -49,8 +47,6 @@ class ProductionConfig(BaseConfig):
     """Production configuration."""
 
     BCRYPT_LOG_ROUNDS = 13
-    os.environ["DATABASE_URL"] = os.environ.get(
-        "DATABASE_URL").replace('postgres:', 'postgresql:')
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "DATABASE_URL_SQL_SERVER",
         "sqlite:///{0}".format(os.path.join(basedir, "prod.db")),
