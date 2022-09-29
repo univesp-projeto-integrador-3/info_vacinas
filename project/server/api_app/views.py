@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 import requests
+from flask_restx import Api
 import unidecode
 from dateutil.relativedelta import relativedelta
 from dotenv import load_dotenv
@@ -15,9 +16,17 @@ from flask_restx import Resource
 
 load_dotenv()  # take environment variables from .env.
 
-api_blueprint = Blueprint("api", __name__, url_prefix='/api')
+api_blueprint = Blueprint("api", __name__)
+api = Api(api_blueprint)
 
-@api.route('/hello')
+
+@api.route("/hello")
 class HelloWorld(Resource):
     def get(self):
+        return {'hello': 'world'}
+
+    def post(self):
+        return {'hello': 'world'}
+
+    def delete(self):
         return {'hello': 'world'}

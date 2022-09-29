@@ -67,12 +67,7 @@ def create_app(script_info=None):
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(main_blueprint)
-    app.register_blueprint(api_blueprint)
-
-    api.init_app(
-      api_blueprint, title='API', description='API', version='1.0',
-      validate=True, default='API', default_label='API', doc='/doc/',
-      prefix='/api', catch_all_404s=True)
+    app.register_blueprint(api_blueprint, url_prefix='/api')
 
     # from flask_login import login_required
 
