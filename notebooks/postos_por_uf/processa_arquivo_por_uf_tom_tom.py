@@ -2,7 +2,6 @@ import os
 import sys
 
 import pandas as pd
-import numpy as np
 from dotenv import load_dotenv
 from geopy.geocoders import TomTom
 
@@ -28,7 +27,7 @@ def get_location_tomtom(api_key_env, endereco_completo):
     try:
         location = geolocator.geocode(endereco_completo)
     except Exception as e:
-        raise Exception("Nenhum retorno na API TomTom", api_key_env)
+        raise Exception("Nenhum retorno na API TomTom", api_key_env, e)
     if not location:
         raise Exception("Nenhum retorno na API TomTom", api_key_env)
     return location
@@ -52,37 +51,37 @@ def get_location(row_df):
         except Exception as e:
             try:
                 location = get_location_tomtom(
-                  'TOMTOM_API_KEY_18', endereco_completo)
+                  'TOMTOM_API_KEY_18', endereco_completo, e)
             except Exception as e:
                 try:
                     location = get_location_tomtom(
-                      'TOMTOM_API_KEY_17', endereco_completo)
+                      'TOMTOM_API_KEY_17', endereco_completo, e)
                 except Exception as e:
                     try:
                         location = get_location_tomtom(
-                          'TOMTOM_API_KEY_16', endereco_completo)
+                          'TOMTOM_API_KEY_16', endereco_completo, e)
                     except Exception as e:
                         try:
                             location = get_location_tomtom(
-                              'TOMTOM_API_KEY_15', endereco_completo)
+                              'TOMTOM_API_KEY_15', endereco_completo, e)
                         except Exception as e:
                             try:
                                 location = get_location_tomtom(
-                                  'TOMTOM_API_KEY_14', endereco_completo)
+                                  'TOMTOM_API_KEY_14', endereco_completo, e)
                             except Exception as e:
                                 try:
                                     location = get_location_tomtom(
-                                      'TOMTOM_API_KEY_13', endereco_completo)
+                                      'TOMTOM_API_KEY_13', endereco_completo, e)
                                 except Exception as e:
                                     try:
                                         location = get_location_tomtom(
                                           'TOMTOM_API_KEY_12',
-                                          endereco_completo)
+                                          endereco_completo, e)
                                     except Exception as e:
                                         try:
                                             location = get_location_tomtom(
                                               'TOMTOM_API_KEY_11',
-                                              endereco_completo)
+                                              endereco_completo, e)
                                         except Exception as e:
                                             print(f' Erro: {e}')
                                             location = None

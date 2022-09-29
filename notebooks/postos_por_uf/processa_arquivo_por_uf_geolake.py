@@ -73,6 +73,6 @@ for uf in ufs:
     print('Arquivo de saída atualizado com sucesso.', file_path)
 
 if len(df_nao_localizados) > 0:
-  print('  Arquivo de saída nao_localizados salvo com sucesso.')
-  df_nao_localizados = pd.concat(lista_df_nao_localizados)
-  df_nao_localizados.to_csv('nao_localizados.csv', index=False)
+    print('  Arquivo de saída nao_localizados salvo com sucesso.')
+    df_nao_localizados = pd.concat(lista_df_nao_localizados)
+    df_nao_localizados.to_csv('nao_localizados.csv', index=False)

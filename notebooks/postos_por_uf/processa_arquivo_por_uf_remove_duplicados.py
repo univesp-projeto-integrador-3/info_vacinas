@@ -3,8 +3,7 @@ import sys
 
 import pandas as pd
 from dotenv import load_dotenv
-from geopy.extra.rate_limiter import RateLimiter
-from geopy.geocoders import Geolake
+
 
 load_dotenv()  # take environment variables from .env.
 
