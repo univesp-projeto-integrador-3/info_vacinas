@@ -11,6 +11,8 @@ from flask_login import LoginManager
 from flask_login.utils import current_user
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_restx import Api
+
 
 # instantiate the extensions
 login_manager = LoginManager()
@@ -20,6 +22,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
 admin = Admin(template_mode='bootstrap4')
+api = Api()
 
 
 class MyView(ModelView):
@@ -60,9 +63,16 @@ def create_app(script_info=None):
     # register blueprints
     from project.server.main.views import main_blueprint
     from project.server.user.views import user_blueprint
+    from project.server.api_app.views import api_blueprint
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(api_blueprint)
+
+    api.init_app(
+      api_blueprint, title='API', description='API', version='1.0',
+      validate=True, default='API', default_label='API', doc='/doc/',
+      prefix='/api', catch_all_404s=True)
 
     # from flask_login import login_required
 

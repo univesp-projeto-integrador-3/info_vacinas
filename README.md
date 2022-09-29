@@ -106,6 +106,23 @@ or
 $ flake8 project
 ```
 
+## Query SQL para localizar registros mais próximos
+
+### PostgreSQL
+
+Exemplo, para Latitude = -22.7552899 e Longitude = -47.1570036
+
+select * from (
+SELECT  *,( 3959 * acos( cos( radians(-22.7552899) ) * cos( radians( "LATITUDE" ) ) * cos( radians( "LONGITUDE" ) - radians(-47.1570036) ) + sin( radians(-22.7552899) ) * sin( radians( "LATITUDE" ) ) ) ) AS distance 
+FROM 
+	public.postos_saude_brasil_completo
+) al
+ORDER by
+	distance
+LIMIT 20;
+
+
+
 ## info_vacinas-app-android
 
 Está sendo desenvolvido um App Android para disponibilizar informações sobre 
