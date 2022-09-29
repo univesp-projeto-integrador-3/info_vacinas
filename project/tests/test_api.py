@@ -1,4 +1,4 @@
-# project/server/tests/test_main.py
+# project/server/tests/test_api.py
 import unittest
 
 from base import BaseTestCase
@@ -10,6 +10,7 @@ class TestApiBlueprint(BaseTestCase):
         response = self.client.get("/api/hello", follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"world", response.data)
+
 
 if __name__ == "__main__":
     unittest.main()
