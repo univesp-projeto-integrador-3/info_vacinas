@@ -29,7 +29,8 @@ parser_cep.add_argument(
     'cep',
     type=int,
     required=True,
-    help="CEP não pode ser vazio!"
+    help="CEP não pode ser vazio!",
+    location='args'
 )
 
 
