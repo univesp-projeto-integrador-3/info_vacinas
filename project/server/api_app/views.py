@@ -1,6 +1,5 @@
 # project/server/api_app/views.py
 from flask_restx import Api, Resource, reqparse
-import unidecode
 from flask import (Blueprint)
 from flask import (jsonify)
 import os
@@ -31,7 +30,7 @@ parser.add_argument(
 parser_cep = reqparse.RequestParser()
 parser_cep.add_argument(
     'cep',
-    type=int,
+    type=str,
     required=True,
     help="CEP não pode ser vazio!",
     location='args'
@@ -62,7 +61,7 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
             DISTANCIA
         ASC
         '''
-    
+
     if uf:
         sql = f'''
             SELECT DISTINCT TOP 10
@@ -86,7 +85,7 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
             ORDER BY
                 DISTANCIA
             ASC
-            '''      
+            '''
 
     rows = []
     try:
@@ -138,9 +137,3 @@ class UnidadesSaude(Resource):
                 dados_cep['latitude'], dados_cep['longitude'], uf)
 
         return {"resultado": lista_unidades_saude}
-
-
-@api.route("/hello")
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
