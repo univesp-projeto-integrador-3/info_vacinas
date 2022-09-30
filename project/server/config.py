@@ -29,6 +29,10 @@ class DevelopmentConfig(BaseConfig):
         "DATABASE_URL_SQL_SERVER",
         "sqlite:///{0}".format(os.path.join(basedir, "dev.db"))
     )
+    SQLALCHEMY_DATABASE_URI_02 = os.environ.get(
+        "DATABASE_URL_SQL_SERVER_02",
+        "sqlite:///{0}".format(os.path.join(basedir, "dev.db"))
+    )
 
 
 class TestingConfig(BaseConfig):
@@ -51,4 +55,8 @@ class ProductionConfig(BaseConfig):
         "DATABASE_URL_SQL_SERVER",
         "sqlite:///{0}".format(os.path.join(basedir, "prod.db")),
     )
+    SQLALCHEMY_DATABASE_URI_02 = os.environ.get(
+        "DATABASE_URL_SQL_SERVER_02",
+        "sqlite:///{0}".format(os.path.join(basedir, "dev.db"))
+    )    
     WTF_CSRF_ENABLED = True

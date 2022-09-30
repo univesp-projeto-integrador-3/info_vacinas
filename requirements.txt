@@ -84,3 +84,4 @@ openpyxl
 Werkzeug <= 2.1.2
 flask == 2.1.2
 flask-restx >= 0.5.1
+pgeocode >= 0.3.0

@@ -362,3 +362,99 @@ login_manager.anonymous_user = AnonymousUser
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+class UnidadeSaude(db.Model):
+
+    __tablename__ = "postos_saude_brasil_completo"
+
+    co_cnes = db.Column('CO_CNES', db.Integer, autoincrement=False)
+    nome = db.Column(
+      'NOME', db.String(255), nullable=False, primary_key=True)
+    uf = db.Column('UF', db.String(2), nullable=False)
+    municipio = db.Column(
+      'MUNICIPIO', db.String(255), unique=False, nullable=True)
+    logradouro = db.Column(
+      'LOGRADOURO', db.String(255), unique=False, nullable=True)
+    numero = db.Column('NUMERO', db.String(255), unique=False, nullable=True)
+    bairro = db.Column('BAIRRO', db.String(255), unique=False, nullable=True)
+    endreco_completo = db.Column(
+      'ENDERECO_COMPLETO', db.String(255), unique=False, nullable=True)
+    latitude = db.Column('LATITUDE', db.Float, autoincrement=False)
+    longitude = db.Column('LONGITUDE', db.Float, autoincrement=False)
+    endereco_api = db.Column(
+      'ENDERECO_API', db.String(255), unique=False, nullable=True)
+    point = db.Column('POINT', db.String(255), unique=False, nullable=True)
+    cep = db.Column('CEP', db.String(255), unique=False, nullable=True)
+
+    def __init__(
+      self,
+      co_cnes,
+      nome,
+      uf,
+      municipio,
+      logradouro,
+      numero,
+      bairro,
+      endereco_completo,
+      latitude,
+      longitude,
+      endereco_api,
+      point,
+      cep
+      ):
+        self.co_cnes = co_cnes
+        self.nome = nome
+        self.uf = uf
+        self.municipio = municipio
+        self.logradouro = logradouro
+        self.numero = numero
+        self.bairro = bairro
+        self.endereco_completo = endereco_completo
+        self.latitude = latitude
+        self.longitude = longitude
+        self.endereco_api = endereco_api
+        self.point = point
+        self.cep = cep
+
+    def get_co_cnes(self):
+        return self.co_cnes
+
+    def get_nome(self):
+        return self.nome
+
+    def get_uf(self):
+        return self.uf
+
+    def get_municipio(self):
+        return self.municipio
+
+    def get_logradouro(self):
+        return self.logradouro
+
+    def get_numero(self):
+        return self.numero
+
+    def get_bairro(self):
+        return self.bairro
+
+    def get_endereco_completo(self):
+        return self.endreco_completo
+
+    def get_latitude(self):
+        return self.latitude
+
+    def get_longitude(self):
+        return self.longitude
+
+    def get_endereco_api(self):
+        return self.endereco_api
+
+    def get_point(self):
+        return self.point
+
+    def get_cep(self):
+        return self.cep
+
+    def __repr__(self):
+        return f"<UnidadeSaude {self.nome} - {self.endreco_completo}>"
