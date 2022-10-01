@@ -128,7 +128,7 @@ class UnidadesSaude(Resource):
         response = requests.get(url, headers=headers)
 
         lista_unidades_saude = []
-        
+
         if response.status_code == 200:
             dados_cep = response.json()
             uf = dados_cep.get('estado').get('sigla').upper()
