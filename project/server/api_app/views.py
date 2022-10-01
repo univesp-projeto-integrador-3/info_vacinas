@@ -62,8 +62,10 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
         ASC
         '''
 
+    # desabilita temporariamente o uso do recurso UF, para permitir mostrar
+    # aos membros do grupo as inconsistências na base de dados
     if uf:
-        sql = f'''
+        sql2 = f'''
             SELECT DISTINCT TOP 10
                 CO_CNES
                 ,NOME
@@ -86,6 +88,7 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
                 DISTANCIA
             ASC
             '''
+        print(sql2)
 
     rows = []
     try:
@@ -131,6 +134,7 @@ class UnidadesSaude(Resource):
 
         if response.status_code == 200:
             dados_cep = response.json()
+            print(dados_cep)
             uf = dados_cep.get('estado').get('sigla').upper()
 
             lista_unidades_saude = get_unidades_by_latitude_longitude(
