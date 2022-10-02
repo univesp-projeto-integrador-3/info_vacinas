@@ -1,5 +1,5 @@
 # project/server/api_app/views.py
-from flask_restx import Api, Resource, reqparse
+from flask_restx import Api, Resource, reqparse, cors
 from flask import (Blueprint)
 from flask import (jsonify)
 import os
@@ -104,6 +104,7 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
   "/unidades_saude/consulta_por_localizacao")
 class UnidadesSaude(Resource):
     @api.expect(parser)
+    @cors.crossdomain(origin="*")
     def get(self):
         args = parser.parse_args()
 
@@ -117,6 +118,7 @@ class UnidadesSaude(Resource):
   "/unidades_saude/consulta_por_cep")
 class UnidadesSaude(Resource):
     @api.expect(parser_cep)
+    @cors.crossdomain(origin="*")
     def get(self):
         args = parser_cep.parse_args()
 

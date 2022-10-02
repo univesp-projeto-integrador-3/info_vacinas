@@ -19,6 +19,7 @@ $ git clone https://github.com/univesp-projeto-integrador-3/info_vacinas.git
 ## Criar o virtualenv
 
 ```sh
+$ pip install virtualenv
 $ virtualenv info-vacinas
 ```
 
@@ -45,13 +46,18 @@ $ pip install -r requirements.txt
 
 ### Set Environment Variables
 
-Ajuste o arquivo .env e o arquivo *project/server/config.py* com as 
-configurações do projeto, e rode:
+Crie um arquivo .env na raiz do projeto com a seguintes chaves e preencha 
+de acordo com o seu ambiente:
 
-```sh
-$ export APP_NAME="info_vacinas"
-$ export APP_SETTINGS=project.server.config.ProductionConfig
-$ export FLASK_DEBUG=0
+```.env
+APP_NAME="info_vacinas"
+APP_SETTINGS=project.server.config.DevelopmentConfig
+FLASK_DEBUG=1
+SECRET_KEY=SuaSecretKey
+DATABASE_URL_SQL_SERVER=mssql+pyodbc://Usuario:Senha@Servidor:Porta/BaseDeDados?driver=ODBC+Driver+17+for+SQL+Server
+DATABASE_URL_SQL_SERVER_02=mssql+pyodbc://Usuario:Senha@Servidor:Porta/BaseDeDados?driver=ODBC+Driver+17+for+SQL+Server
+API_CEP_URL=https://www.cepaberto.com/api/v3/cep?cep=
+API_CEP_TOKEN=TokenDaApiCepAberto
 ```
 
 By default the app is set to use the production configuration. If you would 
