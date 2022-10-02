@@ -110,7 +110,7 @@ class UnidadesSaude(Resource):
         lista_unidades_saude = get_unidades_by_latitude_longitude(
             args['latitude'], args['longitude'], None)
 
-        return {lista_unidades_saude}
+        return {"resultado": lista_unidades_saude}
 
 
 @api.route(
@@ -141,4 +141,4 @@ class UnidadesSaude(Resource):
             lista_unidades_saude = get_unidades_by_latitude_longitude(
                 dados_cep['latitude'], dados_cep['longitude'], uf)
 
-        return {lista_unidades_saude}
+        return {"resultado": lista_unidades_saude}
