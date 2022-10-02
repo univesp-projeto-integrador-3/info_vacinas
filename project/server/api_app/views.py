@@ -1,7 +1,6 @@
 # project/server/api_app/views.py
 from flask_restx import Api, Resource, reqparse, cors
 from flask import (Blueprint)
-from flask import (jsonify)
 import os
 import requests
 from dotenv import load_dotenv
@@ -111,7 +110,7 @@ class UnidadesSaude(Resource):
         lista_unidades_saude = get_unidades_by_latitude_longitude(
             args['latitude'], args['longitude'], None)
 
-        return {"resultado": lista_unidades_saude}
+        return {lista_unidades_saude}
 
 
 @api.route(
@@ -142,4 +141,4 @@ class UnidadesSaude(Resource):
             lista_unidades_saude = get_unidades_by_latitude_longitude(
                 dados_cep['latitude'], dados_cep['longitude'], uf)
 
-        return {"resultado": lista_unidades_saude}
+        return {lista_unidades_saude}
