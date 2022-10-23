@@ -22,7 +22,11 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
 admin = Admin(template_mode='bootstrap4')
-api = Api()
+api = Api(
+    version='1.0',
+    title='InfoVacinas API',
+    description='API do Site Info Vacinas para a localização de unidades básicas de saúde baseadas na localização (CEP ou latitude e longitude).'
+)
 
 
 class MyView(ModelView):
