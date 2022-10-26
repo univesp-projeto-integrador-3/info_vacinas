@@ -144,6 +144,11 @@ def adolescentes():
     return render_template("calendario/adolescentes.html")
 
 
+@main_blueprint.route("/api_info_vacinas")
+def api_info_vacinas():
+    return render_template("main/api.html")
+
+
 @main_blueprint.route("/adultos")
 def adultos():
     return render_template("calendario/adultos.html")
