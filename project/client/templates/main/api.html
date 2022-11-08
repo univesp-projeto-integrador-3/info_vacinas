@@ -5,23 +5,24 @@
         <div class="card">
           <div class="card-header" id="headingOne">
             <h2 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <button class="btn btn-lg" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 API info Vacinas
               </button>
             </h2>
-          </div>
+          </div> <!--Fechamento do card-header-->
       
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 <p>A API Pix Info Vacinas disponibiliza de forma padronizada serviços e funcionalidades oferecidos pelo por este site referentes a consultas a locais de vacinação através de base uniforme que permitem ao usuário desta API realizar integração de suas aplicações ou automações com os serviços oferecidos pela API Info Vacinas.</p>
                 <p>Esta implantação faz parte do projeto info Vacinas que tem o objetivo de disponibilizar ao público residente no Brasil uma experiência de consulta a locais de vacinação com maior acurácia do que os existentes hoje em órgãos governamentais e seus canais oficiais</p>
-            </div>
-          </div>
-        </div>
+            </div> <!--Fechamento do card-body-->
+          </div> <!--Fechamento do Colapse-->
+        </div> <!--Fecho do Card-->
+
         <div class="card">
           <div class="card-header" id="headingTwo">
             <h2 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <button class="btn btn-lg btn-block collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Evolução da API Info Vacinas
               </button>
             </h2>
@@ -43,7 +44,9 @@
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              <p>Esta seção reúne erros que poderiam ser retornados por quaisquer endpoints listados na API infoVacinas.</p>
+              <h4>Erros Gerais</h4>
+              <p>.....</p>
             </div>
           </div>
         </div>
@@ -58,21 +61,14 @@
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
                 <p>O swagger com a documentação da API InfoVacinas está disponível em: <a href="{{ url_for('api.doc') }}" target="_blank">API</a></p>
-              </div>
-            </div>
-          </div>
-      </div>
+              
+            </div> <!--Fechamento do Colapse-->
+          </div> <!--Fechamento do Card Header-->
+      </div> <!--Fechammento Card-->
 
-    
-         
-            
         
-        <div class="accordion-item">
-            <h2 class="text-center">Documentação Swagger da API</h2>
-            <p>O swagger com a documentação da API InfoVacinas está disponível em: <a href="{{ url_for('api.doc') }}" target="_blank">API</a></p>
-        </div>
-
-    </div>
-</div>
+              
+    </div> <!--Fechamento do accordion-->
+</div> <!--Fechamento do body-content-->
 
 {% endblock %}
