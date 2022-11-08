@@ -1,32 +1,37 @@
 {% extends "_base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
 
 <div class="body-content">
-    <div>
-        <div class="container">
-            <h2 class="text-center">API Info Vacinas</h2>
+    <div class="accordion accordion-flush" id="accordionFlushAPI"></div>>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    API Info Vacinas
+                  </button>
+                API Info Vacinas
+            </h2>
             <p>&nbsp</p>
             <p>&nbsp</p>
         </div>
         
-        <div class="container">
+        <div class="accordion-item">
             <h2 class="text-center">Evolução da API Info Vacinas</h2>
             <p>&nbsp</p>
             <p>&nbsp</p>
         </div>
         
-        <div class="container">
+        <div class="accordion-item">
             <h2 class="text-center">Tratamento de erros</h2>
             <p>&nbsp</p>
             <p>&nbsp</p>
         </div>        
         
-        <div class="container">
+        <div class="accordion-item">
             <h2 class="text-center">Gerais</h2>
             <p>&nbsp</p>
             <p>&nbsp</p>
         </div>        
         
-        <div class="container">
+        <div class="accordion-item">
             <h2 class="text-center">Documentação Swagger da API</h2>
             <p>O swagger com a documentação da API InfoVacinas está disponível em: <a href="{{ url_for('api.doc') }}" target="_blank">API</a></p>
         </div>
