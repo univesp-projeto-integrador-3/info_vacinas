@@ -1,6 +1,7 @@
 {% extends "_base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
 
 <div class="body-content">
+  <p>Sobre está API</p>
     <div id="accordion">
         <div class="card">
           <div class="card-header" id="headingOne">
@@ -13,8 +14,9 @@
       
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
-                <p>A API Pix Info Vacinas disponibiliza de forma padronizada serviços e funcionalidades oferecidos pelo por este site referentes a consultas a locais de vacinação através de base uniforme que permitem ao usuário desta API realizar integração de suas aplicações ou automações com os serviços oferecidos pela API Info Vacinas.</p>
+                <p>A API Pix Info Vacinas disponibiliza de forma padronizada serviços e funcionalidades oferecidos por este site referentes a consultas de locais de vacinação através de base uniforme que permitem ao usuário desta API realizar integração de suas aplicações ou automações com os serviços oferecidos pela API Info Vacinas.</p>
                 <p>Esta implantação faz parte do projeto info Vacinas que tem o objetivo de disponibilizar ao público residente no Brasil uma experiência de consulta a locais de vacinação com maior acurácia do que os existentes hoje em órgãos governamentais e seus canais oficiais</p>
+                
             </div> <!--Fechamento do card-body-->
           </div> <!--Fechamento do Colapse-->
         </div> <!--Fecho do Card-->
@@ -29,8 +31,19 @@
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
-              <p>A API Info Vacinas busca respeitar...</p>
-              <p>Atualmente, porém API InfoVacinas consta apenas com a versão inicial disponibilizada ao público, API infoVacinas 1.0</p>
+              <p>Atualmente a API InfoVacinas consta apenas com a versão inicial disponibilizada ao público, API infoVacinas 1.0</p>
+
+              <p>O versionamento de implementações respeitarão a <a href="https://semver.org/lang/pt-BR/" target="_blank">Especificação de Versionamento Semântico (semVer></a></p>
+             
+              <p>Para versóes futuras, as seguintes mudanças são esperadas e consideradas compatíveis:</p>
+
+              <ul>
+                <li>Adição de novos recursos;</li>
+                <li>Adição de novos parâmetros opcionais a requisições a consultas existentes;</li>
+                <li>Adição de novos campos em respostas da API;</li>li>
+                <li>Alteração da ordem de campos;</li>
+                <li>Adição de novos elementos em enumerações.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -45,7 +58,14 @@
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
               <p>Esta seção reúne erros que poderiam ser retornados por quaisquer endpoints listados na API infoVacinas.</p>
-              <p>testes</p>
+              <p>A API infoVacinas retorna códigos de status HTTP a cada requisição indicando o sucesso ou as falhas. Dessa forma de maneira geral considere os seguintes códigos:</p>
+
+                <ul>
+                  <li>Códigos da série 200 a 2Xx equivalem sucesso na requisição;</li>
+                  <li>Códigos da série 400 a 4Xx indicam falhas causadas pelas informações enviadas pelo cliente ou pelo estado atual das entidades;</li> 
+                  <li>Códigos da série 500 a 5xx indicam problemas no serviço no lado da API infoVacinas, podendo ser problemas temporários por indisponibilidades dos serviços de implementação utilizados.</li>
+                </ul>
+              
               <h4>Erros Gerais</h4>
               <p>.....</p>
             </div>
