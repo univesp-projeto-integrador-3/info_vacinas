@@ -241,7 +241,7 @@ def consulta_ubs_por_endereco():
 def ubs_ufs():
     sql = '''
         SELECT
-            DISTINCT UF
+            DISTINCT CAST(UF AS NVARCHAR(100)) AS UF
         FROM
             postos_saude_brasil_completo
         ORDER BY
@@ -268,7 +268,7 @@ def ubs_cidades():
     uf = request.args.get('uf', default='SP', type=str)
     sql = f'''
         SELECT DISTINCT
-            MUNICIPIO
+            CAST(MUNICIPIO AS NVARCHAR(200)) AS MUNICIPIO
         FROM
             postos_saude_brasil_completo
         WHERE
@@ -298,7 +298,7 @@ def ubs_bairros():
         'municipio', default='SAO PAULO', type=str)
     sql = f'''
         SELECT DISTINCT
-            BAIRRO
+            CAST(BAIRRO AS NVARCHAR(200)) AS BAIRRO
         FROM
             postos_saude_brasil_completo
         WHERE
@@ -422,7 +422,7 @@ def consulta_ubs_mais_proxima():
             sqrt(square(abs(Latitude-({lat}))) +
             square(abs(Longitude-({lng})))) < 5
         ORDER BY
-            CAST(Distance AS float)
+            sqrt(square(abs(Latitude-({lat}))) + square(abs(Longitude-({lng}))))
         ASC
         '''
 
