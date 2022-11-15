@@ -274,7 +274,7 @@ def ubs_cidades():
         WHERE
             UF = '{uf}'
         ORDER BY
-            CAST(MUNICIPIO AS NVARCHAR(200))
+            MUNICIPIO
     '''
 
     rows = []
