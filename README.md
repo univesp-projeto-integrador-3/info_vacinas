@@ -139,3 +139,6 @@ O repositórido GitHub do APP está disponível em:
 https://github.com/univesp-projeto-integrador-3/info_vacinas_app
 
 A pasta ./out contém os arquivos de saída compilados.
+
+
+A aplicação ficará no ar no heroku na conta gratuita até 28/11/2022.
