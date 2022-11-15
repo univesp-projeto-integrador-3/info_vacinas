@@ -52,7 +52,7 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
             ,sqrt(square(abs(LATITUDE-({latitude}))) +
             square(abs(LONGITUDE-({longitude})))) as DISTANCIA
         FROM
-            [univesp].[dbo].[postos_saude_brasil_completo]
+            postos_saude_brasil_completo
         WHERE
             sqrt(square(abs(LATITUDE-({latitude}))) +
             square(abs(LONGITUDE-({longitude})))) < 50
@@ -79,7 +79,7 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
                 ,sqrt(square(abs(LATITUDE-({latitude}))) +
                 square(abs(LONGITUDE-({longitude})))) as DISTANCIA
             FROM
-                [univesp].[dbo].[postos_saude_brasil_completo]
+                postos_saude_brasil_completo
             WHERE
                 sqrt(square(abs(LATITUDE-({latitude}))) +
                 square(abs(LONGITUDE-({longitude})))) < 50 AND UF = '{uf}'
