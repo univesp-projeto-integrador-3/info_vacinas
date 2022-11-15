@@ -244,8 +244,6 @@ def ubs_ufs():
             DISTINCT UF
         FROM
             postos_saude_brasil_completo
-        WHERE
-          UF IS NOT NULL
         ORDER BY
             UF
         ;
