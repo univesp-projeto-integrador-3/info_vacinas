@@ -82,12 +82,12 @@ def consulta_ubs():
             SELECT
                 UF,
                 MUNICIPIO,
-                ESTABELECIMENTO,
+                NOME AS ESTABELECIMENTO,
                 LOGRADOURO,
                 NUMERO,
                 BAIRRO
             FROM
-                unidades_vacinacao
+                postos_saude_brasil_completo
             WHERE
                 UF = '{uf}' AND
                 MUNICIPIO = '{municipio}' AND
@@ -101,12 +101,12 @@ def consulta_ubs():
                 SELECT
                     UF,
                     MUNICIPIO,
-                    ESTABELECIMENTO,
+                    NOME AS ESTABELECIMENTO,
                     LOGRADOURO,
                     NUMERO,
                     BAIRRO
                 FROM
-                    unidades_vacinacao
+                    postos_saude_brasil_completo
                 WHERE
                     UF = '{uf}' AND
                     MUNICIPIO = '{municipio}'
@@ -243,7 +243,9 @@ def ubs_ufs():
         SELECT
             DISTINCT UF
         FROM
-            unidades_vacinacao
+            postos_saude_brasil_completo
+        WHERE
+          UF IS NOT NULL
         ORDER BY
             UF
         ;
