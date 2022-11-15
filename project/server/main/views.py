@@ -87,7 +87,7 @@ def consulta_ubs():
                 NUMERO,
                 BAIRRO
             FROM
-                univesp.dbo.unidades_vacinacao
+                unidades_vacinacao
             WHERE
                 UF = '{uf}' AND
                 MUNICIPIO = '{municipio}' AND
@@ -106,7 +106,7 @@ def consulta_ubs():
                     NUMERO,
                     BAIRRO
                 FROM
-                    univesp.dbo.unidades_vacinacao
+                    unidades_vacinacao
                 WHERE
                     UF = '{uf}' AND
                     MUNICIPIO = '{municipio}'
@@ -243,7 +243,7 @@ def ubs_ufs():
         SELECT
             DISTINCT UF
         FROM
-            univesp.dbo.unidades_vacinacao
+            unidades_vacinacao
         ORDER BY
             UF
         ;
@@ -270,7 +270,7 @@ def ubs_cidades():
         SELECT DISTINCT
             MUNICIPIO
         FROM
-            univesp.dbo.unidades_vacinacao
+            unidades_vacinacao
         WHERE
             UF = '{uf}'
         ORDER BY
@@ -300,7 +300,7 @@ def ubs_bairros():
         SELECT DISTINCT
             BAIRRO
         FROM
-            univesp.dbo.unidades_vacinacao
+            unidades_vacinacao
         WHERE
             UF = '{uf}' AND
             MUNICIPIO = '{municipio}'
@@ -338,7 +338,7 @@ def ubs_lista():
             NUMERO,
             BAIRRO
         FROM
-            univesp.dbo.unidades_vacinacao
+            unidades_vacinacao
         WHERE
             UF = '{uf}' AND
             MUNICIPIO = '{municipio}' AND
@@ -355,7 +355,7 @@ def ubs_lista():
                 NUMERO,
                 BAIRRO
             FROM
-                univesp.dbo.unidades_vacinacao
+                unidades_vacinacao
             WHERE
                 UF = '{uf}' AND
                 MUNICIPIO = '{municipio}'
@@ -416,7 +416,7 @@ def consulta_ubs_mais_proxima():
             sqrt(square(abs(Latitude-({lat}))) +
             square(abs(Longitude-({lng})))) as Distance
         FROM
-            [dbo].[cadastro_estabelecimentos_cnes]
+            cadastro_estabelecimentos_cnes
         WHERE
             IBGE = LEFT({ibge}, 6) AND
             sqrt(square(abs(Latitude-({lat}))) +
