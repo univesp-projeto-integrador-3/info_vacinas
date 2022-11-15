@@ -270,7 +270,7 @@ def ubs_cidades():
         SELECT DISTINCT
             MUNICIPIO
         FROM
-            unidades_vacinacao
+            postos_saude_brasil_completo
         WHERE
             UF = '{uf}'
         ORDER BY
@@ -300,7 +300,7 @@ def ubs_bairros():
         SELECT DISTINCT
             BAIRRO
         FROM
-            unidades_vacinacao
+            postos_saude_brasil_completo
         WHERE
             UF = '{uf}' AND
             MUNICIPIO = '{municipio}'
@@ -333,12 +333,12 @@ def ubs_lista():
         SELECT
             UF,
             MUNICIPIO,
-            ESTABELECIMENTO,
+            NOME AS ESTABELECIMENTO,
             LOGRADOURO,
             NUMERO,
             BAIRRO
         FROM
-            unidades_vacinacao
+            postos_saude_brasil_completo
         WHERE
             UF = '{uf}' AND
             MUNICIPIO = '{municipio}' AND
@@ -350,12 +350,12 @@ def ubs_lista():
             SELECT
                 UF,
                 MUNICIPIO,
-                ESTABELECIMENTO,
+                NOME AS ESTABELECIMENTO,
                 LOGRADOURO,
                 NUMERO,
                 BAIRRO
             FROM
-                unidades_vacinacao
+                postos_saude_brasil_completo
             WHERE
                 UF = '{uf}' AND
                 MUNICIPIO = '{municipio}'
