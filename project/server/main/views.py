@@ -245,7 +245,7 @@ def ubs_ufs():
         FROM
             postos_saude_brasil_completo
         ORDER BY
-            UF
+            CAST(UF AS NVARCHAR(100))
         ;
     '''
 
@@ -274,7 +274,7 @@ def ubs_cidades():
         WHERE
             UF = '{uf}'
         ORDER BY
-            MUNICIPIO
+            CAST(MUNICIPIO AS NVARCHAR(200))
     '''
 
     rows = []
@@ -305,7 +305,7 @@ def ubs_bairros():
             UF = '{uf}' AND
             MUNICIPIO = '{municipio}'
         ORDER BY
-            BAIRRO
+            CAST(BAIRRO AS NVARCHAR(200))
     '''
 
     rows = []
@@ -422,7 +422,7 @@ def consulta_ubs_mais_proxima():
             sqrt(square(abs(Latitude-({lat}))) +
             square(abs(Longitude-({lng})))) < 5
         ORDER BY
-            Distance
+            CAST(Distance AS float)
         ASC
         '''
 
