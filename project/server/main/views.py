@@ -240,12 +240,12 @@ def consulta_ubs_por_endereco():
 @main_blueprint.route("/ubs_uf", methods=["GET"])
 def ubs_ufs():
     sql = '''
-        SELECT
-            DISTINCT CAST(UF AS NVARCHAR(100)) AS UF
+        SELECT DISTINCT
+            UF
         FROM
             postos_saude_brasil_completo
         ORDER BY
-            CAST(UF AS NVARCHAR(100))
+            UF
         ;
     '''
 
@@ -268,7 +268,7 @@ def ubs_cidades():
     uf = request.args.get('uf', default='SP', type=str)
     sql = f'''
         SELECT DISTINCT
-            CAST(MUNICIPIO AS NVARCHAR(200)) AS MUNICIPIO
+            MUNICIPIO
         FROM
             postos_saude_brasil_completo
         WHERE
@@ -298,14 +298,14 @@ def ubs_bairros():
         'municipio', default='SAO PAULO', type=str)
     sql = f'''
         SELECT DISTINCT
-            CAST(BAIRRO AS NVARCHAR(200)) AS BAIRRO
+            BAIRRO
         FROM
             postos_saude_brasil_completo
         WHERE
             UF = '{uf}' AND
             MUNICIPIO = '{municipio}'
         ORDER BY
-            CAST(BAIRRO AS NVARCHAR(200))
+            BAIRRO
     '''
 
     rows = []
