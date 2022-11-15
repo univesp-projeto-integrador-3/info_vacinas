@@ -38,7 +38,7 @@ parser_cep.add_argument(
 
 def get_unidades_by_latitude_longitude(latitude, longitude, uf):
     sql = f'''
-        SELECT DISTINCT TOP 10
+        SELECT TOP 10
              CO_CNES
             ,NOME
             ,LOGRADOURO
@@ -65,7 +65,7 @@ def get_unidades_by_latitude_longitude(latitude, longitude, uf):
     # aos membros do grupo as inconsistências na base de dados
     if uf:
         sql2 = f'''
-            SELECT DISTINCT TOP 10
+            SELECT TOP 10
                 CO_CNES
                 ,NOME
                 ,LOGRADOURO
