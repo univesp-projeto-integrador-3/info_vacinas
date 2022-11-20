@@ -2,9 +2,32 @@
 
 
 <h2>Sobre</h2>
-Este projeto, infoVacinas, constitui-se atualmente de três grandes entregas para atendimento as disciplinas de Projetos Integradores (I, II e III) do Eixo de Computação da Univesp, constituído dos cursos de Bacharelado em: Ciência de Dados, Engenharia da Computação e Tecnologia de Informação. Abaixo desbobramos as etapas do InfoVacinas.
+Este projeto, infoVacinas, constitui-se de três grandes entregas para atendimento as disciplinas de Projetos Integradores (I, II e III) do Eixo de Computação da Univesp, constituído dos cursos de Bacharelado em: Ciência de Dados, Engenharia da Computação e Tecnologia de Informação. Abaixo desbobramos as etapas do InfoVacinas.
 <hr>
 <hr>
+<div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-lg" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Projeto Integrador I
+          </button>
+        </h2>
+      </div> <!--Fechamento do card-header-->
+  
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+            <p><b>Orientadora:</b> Gláucia Uesugi </p>
+            <p> <b>Integrantes:</b> Duarte, Lucas, Ricardo, Suzana e Walmir.</p>
+            <p>Trabalho apresentado para disciplina Projeto Integrador I no segundo semestre de 2021. Aplicação Web com objetivo primário de exibir calendário de vacinação de acordo com faixa etária.</p>
+            <p><b>Resumo em vídeo:</b></p>
+            <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/DWlD5glhdj4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div> <!--Fechamento do card-body-->
+      </div> <!--Fechamento do Colapse-->
+    </div> <!--Fecho do Card-->
+    
 <h4>Projeto integrador I</h4>
 <p><b>Orientadora:</b> Gláucia Uesugi </p>
 <p> <b>Integrantes:</b> Duarte, Lucas, Ricardo, Suzana e Walmir.</p>
@@ -40,4 +63,6 @@ Este projeto, infoVacinas, constitui-se atualmente de três grandes entregas par
 <br>
 <br>
 <a href="https://univesp.br/" target="_blank"> <img src="{{url_for('static', filename='img/univesp.png')}}" width="68" height="24"></a>
+
+</div> <!--Fechamento do accordion-->
 {% endblock %}
