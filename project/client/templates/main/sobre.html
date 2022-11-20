@@ -1,6 +1,6 @@
 {% extends "_base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
 
-
+<section>
 <h2>Sobre</h2>
 Este projeto, infoVacinas, constitui-se de três grandes entregas para atendimento as disciplinas de Projetos Integradores (I, II e III) do Eixo de Computação da Univesp, constituído dos cursos de Bacharelado em: Ciência de Dados, Engenharia da Computação e Tecnologia de Informação. Abaixo desbobramos as etapas do InfoVacinas.
 <hr>
@@ -23,8 +23,9 @@ Este projeto, infoVacinas, constitui-se de três grandes entregas para atendimen
             <p>Trabalho apresentado para disciplina Projeto Integrador I no segundo semestre de 2021. Aplicação Web com objetivo primário de exibir calendário de vacinação de acordo com faixa etária.</p>
             <p><b>Resumo em vídeo:</b></p>
             <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/DWlD5glhdj4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/DWlD5glhdj4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
+
         </div> <!--Fechamento do card-body-->
       </div> <!--Fechamento do Colapse-->
     </div> <!--Fecho do Card-->
@@ -80,7 +81,7 @@ Este projeto, infoVacinas, constitui-se de três grandes entregas para atendimen
 
 
 </div> <!--Fechamento do accordion-->
-
+</section>
 <br>
 
 <a href="https://univesp.br/" target="_blank"> <img src="{{url_for('static', filename='img/univesp.png')}}" width="68" height="24"></a>
